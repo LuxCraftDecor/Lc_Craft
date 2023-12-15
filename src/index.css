@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card-header {
+    height: 100px;
+}
+main {
+    height: 500px;
+    overflow: auto;
+}
