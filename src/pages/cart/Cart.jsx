@@ -1,31 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import myContext from '../../context/data/myContext';
 import Layout from '../../components/layout/Layout';
-import Modal from '../../components/modal/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteFromCart } from '../../redux/cartSlice';
-import { toast } from 'react-toastify';
-import {  collection, getDoc, doc } from 'firebase/firestore';
-import { fireDB } from '../../fireabase/FirebaseConfig';
+import { useNavigate } from 'react-router-dom';
+
 function Cart() {
   const context = useContext(myContext)
   const { mode, cartProductsFromFirestore,deleteCartItemFromFirestore } = context;
-
-  const dispatch = useDispatch()
-
-  const cartItems = useSelector((state) => state.cart);
-
-
-  console.log(cartItems)
-
-  const deleteCart = (itemId) => {
-    deleteCartItemFromFirestore(itemId);
-    toast.success("Delete cart")
-  }
-
-  // useEffect(() => {
-  //   localStorage.setItem('cart', JSON.stringify(cartItems));
-  // }, [cartItems])
+const navigate = useNavigate()
 
   const [totalAmout, setTotalAmount] = useState(0);
 
@@ -35,11 +16,6 @@ function Cart() {
       temp = temp + parseInt(cartItem.price)
     })
     setTotalAmount(temp);
-    console.log(temp)
-
-
-
-
   }, [cartProductsFromFirestore])
 
 
@@ -51,135 +27,22 @@ if(totalAmout>0){
 }
 else{
   shipping = parseInt(0);
-
-  shipping = parseInt(0);
 }
 
  
-    const grandTotal = shipping + totalAmout;
- 
-  // console.log(grandTotal)
-
-  /**========================================================================
-   *!                           Payment Intigration
-   *========================================================================**/ 
-
-  const [name, setName] = useState("")
-  const [address, setAddress] = useState("");
-  const [pincode, setPincode] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("");
-  // const [cartProductsFromFirestore, setCartProductsFromFirestore] = useState([]);
+  const grandTotal = shipping + totalAmout;
+  const buyNow =  () => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const userUid = storedUser?.user?.uid;
+  if(userUid){
+    navigate('/payment')
+  }else{
+    navigate('/login')
+  }
 
 
 
-
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem('user'));
-  //   const userUid = storedUser?.user?.uid;
-
-  //   const userCartRef = doc(fireDB, 'carts', userUid);
-
-  //   const fetchCartProducts = async () => {
-  //     try {
-  //       const userCartDoc = await getDoc(userCartRef);
-
-  //       if (userCartDoc.exists()) {
-  //         const cartItemsFromFirestore = userCartDoc.data().cartItems;
-  //         console.log('Cart Items from Firestore:', cartItemsFromFirestore);
-  //         setCartProductsFromFirestore(cartItemsFromFirestore || []);
-  //       } else {
-  //         console.log('User cart not found in Firestore');
-  //         setCartProductsFromFirestore([]);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error retrieving user cart from Firestore:', error);
-  //     }
-  //   };
-
-  //   fetchCartProducts();
-  // }, [cartItems]);
-
-
-
-  const buyNow = async () => {
-    if (name === "" || address == "" || pincode == "" || phoneNumber == "") {
-      return toast.error("All fields are required", {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      })
-    }
-
-    const addressInfo = {
-      name,
-      address,
-      pincode,
-      phoneNumber,
-      date: new Date().toLocaleString(
-        "en-US",
-        {
-          month: "short",
-          day: "2-digit",
-          year: "numeric",
-        }
-      )
-    }
-
-    var options = {
-      key: "",
-      key_secret: "",
-      amount: parseInt(grandTotal * 100),
-      currency: "INR",
-      order_receipt: 'order_rcptid_' + name,
-      name: "LuxCraft Decor",
-      description: "for testing purpose",
-      handler: function (response) {
-        console.log(response)
-        toast.success('Payment Successful')
-
-        const paymentId = response.razorpay_payment_id;
-
-        const orderInfo = {
-          cartProductsFromF,
-          addressInfo,
-          date: new Date().toLocaleString(
-            "en-US",
-            {
-              month: "short",
-              day: "2-digit",
-              year: "numeric",
-            }
-          ),
-          email: JSON.parse(localStorage.getItem("user")).user.email,
-          userid: JSON.parse(localStorage.getItem("user")).user.uid,
-          paymentId
-        }
-
-        try {
-
-          const orderRef = collection(fireDB, 'order');
-          addDoc(orderRef, orderInfo);
-
-        } catch (error) {
-          console.log(error)
-        }
-      },
-
-      theme: {
-        color: "#3399cc"
-      }
-    };
-
-    var pay = new window.Razorpay(options);
-    pay.open();
-    console.log(pay)
-
-
+  
   }
   return (
     <Layout >
@@ -216,10 +79,11 @@ else{
               <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Subtotal</p>
               <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>${totalAmout}</p>
             </div>
+            {cartProductsFromFirestore.length > 0 && (
             <div className="flex justify-between">
               <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shipping</p>
               <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>${shipping}</p>
-            </div>
+            </div> )}
             <hr className="my-4" />
             <div className="flex justify-between mb-3">
               <p className="text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>Total</p>
@@ -227,18 +91,11 @@ else{
                 <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>${grandTotal}</p>
               </div>
             </div>
-            {/* <Modal  /> */}
-            <Modal
-              name={name}
-              address={address}
-              pincode={pincode}
-              phoneNumber={phoneNumber}
-              setName={setName}
-              setAddress={setAddress}
-              setPincode={setPincode}
-              setPhoneNumber={setPhoneNumber}
-              buyNow={buyNow}
-            />
+            {cartProductsFromFirestore.length > 0 && (
+          <button className="items-center h-10 w-full bg-orange-400" onClick={buyNow}>
+            Buy Now
+          </button>
+        )}        
           </div>
         </div>
       </div>

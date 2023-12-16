@@ -1,22 +1,31 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import myContext from '../../context/data/myContext'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import Recommended from "../../Recommended/Recommended";
 import Sidebar from "../../Sidebar/Sidebar";
 import "../../index.css";
 import Navbar from "../../components/navbar/Navbar";
-
 // ... (imports)
 
 function Allproducts() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { slink } = useParams();
+  
+
   const context = useContext(myContext);
 
   const {
     product,
   
   } = context;
+
+  // useEffect(() => {
+  //   // Use the category from the URL
+  //   const category = params.category;
+  //   setSelectedCategory(category);
+  // }, [params.category]);
  // ----------- Radio Filtering -----------
  const handleChange = (event) => {
   setSelectedCategory(event.target.value);

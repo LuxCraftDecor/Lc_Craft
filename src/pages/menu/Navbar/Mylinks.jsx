@@ -1,248 +1,174 @@
+
 export const links = [
   {
-    name: "Landscape",
+    name:"Home",link:"/",
+    submenu: false,
+  },
+
+  {
+    name: "Art Category",
     submenu: true,
     sublinks: [
       {
-        Head: "Urban Landscapes",
+        Head: "FIGURATIVE PAINTINGS",  link:"Figurative-paintings",
         sublink: [
-          { name: "Melbourne Cityscapes", link: "/" },
-          { name: "Street Views", link: "/" },
-          { name: "Iconic Landmarks", link: "/" },
+          { name: "Couple, Romantic, Love", link: "Couple-Romantic-Love" },
+          { name: "Women, Lady, Feminine", link: "Women-Lady-Feminine" },
+          { name: "Fashion, Glamour", link: "Fashion-Glamour" },
+          { name: "Tribal, African", link: "Tribal-African" },
+          { name: "Mother & Baby", link: "Mother-Baby" },
+          { name: "Sunrise", link: "Sunrise" },
+          { name: "Nude, Anatomy", link: "Nude-Anatomy" },
+          { name: "See More >", link: "Figurative-Paintings-More" },
         ],
       },
       {
-        Head: "Natural Landscapes",
+        Head: "RELIGIOUS PAINTINGS",link:"Religious-paintings",
         sublink: [
-          { name: "Beaches", link: "/" },
-          { name: "Outback", link: "/" },
+          { name: "Buddha", link: "Buddha" },
+          { name: "Shiva, Mahadev, Parvati", link: "Shiva-Mahadev-Parvati" },
+          { name: "Krishna, Radha Krishna", link: "Krishna-Radha-Krishna" },
+          { name: "Ganesha, Ganapati", link: "Ganesha-Ganapati" },
+          { name: "Jesus Christ", link: "Jesus-Christ" },
+          { name: "Mahabharat, Ramayana", link: "Mahabharat-Ramayana" },
+          { name: "See More >", link: "Religious-Paintings-More" },
         ],
       },
       {
-        Head: "Abstract Landscapes",
+        Head: "LANDSCAPE PAINTINGS",link:"landscape-paintings",
         sublink: [
-          { name: "Non-traditional Interpretations", link: "/" },
+          { name: "Nature, Forest, Scenery", link: "Nature-Forest-Scenery" },
+          { name: "Ship, Sea, Beach", link: "Ship-Sea-Beach" },
+          { name: "City", link: "City" },
+          { name: "Tree, Botanical", link: "Tree-Botanical" },
+          { name: "Sunrise, Sunset, Rising Sun", link: "Sunrise-Sunset-Rising-Sun" },
+          { name: "Walkway, Road", link: "Walkway-Road" },
+          { name: "See More >", link: "Landscape-Paintings-More" },
+        ],
+      },
+      {
+        Head: "ABSTRACT PAINTINGS",link:"abstract-paintings",
+        sublink: [
+          { name: "Pure Abstract Paintings", link: "Pure-Abstract-Paintings" },
+          { name: "Geometric Abstract Paintings", link: "Geometric-Abstract-Paintings" },
+          { name: "See More >", link: "Abstract-Paintings-More" },
+        ],
+      },
+      {
+        Head: "INDIAN PAINTINGS",link:"austrelian-paintings",
+        sublink: [
+          { name: "Rural, Village", link: "Rural-Village" },
+          { name: "Rajasthan, Rajasthani", link: "Rajasthan-Rajasthani" },
+          { name: "Traditional, Ethnic, Folk, Tribal", link: "Traditional-Ethnic-Folk-Tribal" },
+          { name: "Temples, Forts, Monuments", link: "Temples-Forts-Monuments" },
+          { name: "Indian Cities", link: "Indian-Cities" },
+          { name: "Indian Culture & Heritage", link: "Indian-Culture-Heritage" },
+          { name: "See More >", link: "Indian-Paintings-More" },
+        ],
+      },
+      {
+        Head: "PRINTED PAINTINGS",link:"printed-paintings",
+        sublink: [
+          { name: "New Age Art - Catalogue 1", link: "New-Age-Art-Catalogue-1" },
+          { name: "New Age Art - Catalogue 2", link: "New-Age-Art-Catalogue-2" },
+          { name: "Historical European Masters", link: "Historical-European-Masters" },
+          { name: "Ancient Indian Art", link: "Ancient-Indian-Art" },
+          { name: "Painting Prints", link: "Painting-Prints" },
+          { name: "Painting Prints by Featured Artists", link: "Painting-Prints-Featured-Artists" },
+          { name: "See More >", link: "Printed-Paintings-More" },
+        ],
+      },
+      {
+        Head: "ANIMAL & BIRDS PAINTINGS",link:"animal-bird-paintings",
+        sublink: [
+          { name: "Horses", link: "Horses" },
+          { name: "Wildlife", link: "Wildlife" },
+          { name: "Elephant", link: "Elephant" },
+          { name: "Birds", link: "Birds" },
+          { name: "Fishes", link: "Fishes" },
+          { name: "Dog", link: "Dog" },
+          { name: "See More >", link: "Animal-Birds-Paintings-More" },
+        ],
+      },
+      {
+        Head: "OTHER PAINTINGS",link:"other-paintings",
+        sublink: [
+          { name: "Motivational, Inspirational", link: "Motivational-Inspirational" },
+          { name: "Contemporary & Modern", link: "Contemporary-Modern" },
+          { name: "Still Life", link: "Still-Life" },
+          { name: "Realistic", link: "Realistic" },
+          { name: "Surrealism & Deep Art", link: "Surrealism-Deep-Art" },
+          { name: "Unique, Unusual", link: "Unique-Unusual" },
+          { name: "See More >", link: "Other-Paintings-More" },
         ],
       },
     ],
   },
   {
-    name: "Portraiture",
+    name: "Art Type",
     submenu: true,
-    sublinks: [
+    sublinks:[
       {
-        Head: "Classic Portraits",
+        Head: "MEDIUM & SURFACE", link:"Mediu-and-surface",
         sublink: [
-          { name: "Individuals", link: "/" },
-          { name: "Groups", link: "/" },
-        ],
-      },
-      {
-        Head: "Contemporary Portraits",
-        sublink: [
-          { name: "Modern Styles", link: "/" },
-          { name: "Abstract Portraits", link: "/" },
-        ],
-      },
-      {
-        Head: "Cultural Portraits",
-        sublink: [
-          { name: "Rich Diversity", link: "/" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Abstract",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Geometric",
-        sublink: [
-          { name: "Shapes and Forms", link: "/" },
-        ],
-      },
-      {
-        Head: "Emotional",
-        sublink: [
-          { name: "Conveys Emotions", link: "/" },
-        ],
-      },
-      {
-        Head: "Minimalist",
-        sublink: [
-          { name: "Simple Lines", link: "/" },
-          { name: "Limited Color Palette", link: "/" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Wildlife",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Native Wildlife",
-        sublink: [
-          { name: "Kangaroos", link: "/" },
-          { name: "Koalas", link: "/" },
-          { name: "Other Wildlife", link: "/" },
-        ],
-      },
-      {
-        Head: "Flora",
-        sublink: [
-          { name: "Native Plants", link: "/" },
-          { name: "Flowers (e.g., Eucalyptus, Waratahs)", link: "/" },
-        ],
-      },
-      {
-        Head: "Birdlife",
-        sublink: [
-          { name: "Australian Birds", link: "/" },
+          { name: "Canvas Paintings", link: "Canvas-Paintings" },
+          { name: "Paper Paintings", link: "Paper-Paintings" },
+          { name: "Oil Paintings", link: "Oil-Paintings" },
+          { name: "Acrylic Paintings", link: "Acrylic-Paintings" },
+          { name: "Watercolor Paintings", link: "Watercolor-Paintings" },
+          { name: "Other Surfaces (Material)", link: "Other-Surfaces" },
+          { name: "Other Mediums (Colours)", link: "Other-Mediums" },
+          { name: "See More >", link: "Art-Type-More" },
         ],
       },
 
-    ],
-  },
-  {
-    name: "Still Life and Objects",
-    submenu: true,
-    sublinks: [
       {
-        Head: "Traditional Still Life",
+        Head: "SHADES",link:"art-by-shades",
         sublink: [
-          { name: "Classic Compositions", link: "/" },
-          { name: "Fruits, Flowers, and Objects", link: "/" },
-        ],
-      },
-      {
-        Head: "Modern Still Life",
-        sublink: [
-          { name: "Contemporary Interpretations", link: "/" },
-          { name: "Modern Objects", link: "/" },
-        ],
-      },
-      {
-        Head: "Themed Collections",
-        sublink: [
-          { name: "Culinary", link: "/" },
-          { name: "Vintage", link: "/" },
-          { name: "Natural Elements", link: "/" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Seascapes and Marine Life",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Coastal Scenes",
-        sublink: [
-          { name: "Beaches", link: "/" },
-          { name: "Cliffs", link: "/" },
-          { name: "Coastal Towns", link: "/" },
-        ],
-      },
-      {
-        Head: "Underwater Life",
-        sublink: [
-          { name: "Marine Creatures", link: "/" },
-          { name: "Underwater Landscapes", link: "/" },
-        ],
-      },
-      {
-        Head: "Nautical",
-        sublink: [
-          { name: "Sailing", link: "/" },
-          { name: "Ships", link: "/" },
-          { name: "Maritime Culture", link: "/" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Street Art and Graffiti-Inspired",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Urban Street Art",
-        sublink: [
-          { name: "Melbourne Laneways", link: "/" },
-          { name: "Street Art Culture", link: "/" },
-        ],
-      },
-      {
-        Head: "Abstract Graffiti",
-        sublink: [
-          { name: "Incorporating Graffiti Elements", link: "/" },
-        ],
-      },
-      {
-        Head: "Pop Culture",
-        sublink: [
-          { name: "Contemporary Pop Culture", link: "/" },
-          { name: "Urban Life", link: "/" },
-        ],
-      },
-    ],
-  },
-  {
-    name: "Indigenous Art",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Traditional Indigenous Art",
-        sublink: [
-          { name: "Ancient Traditions", link: "/" },
-        ],
-      },
-      {
-        Head: "Contemporary Indigenous Art",
-        sublink: [
-          { name: "Modern Interpretations", link: "/" },
-          { name: "Styles by Indigenous Artists", link: "/" },
-        ],
-      },
-      {
-        Head: "Collaborative Works",
-        sublink: [
-          { name: "Joint Creations", link: "/" },
-          { name: "Indigenous and Non-Indigenous Artists", link: "/" },
+          { name: "Black and White Paintings", link: "Black-White-Paintings" },
+          { name: "Yellow, Brown Paintings", link: "Yellow-Brown-Paintings" },
+          { name: "Red, Pink, Orange Paintings", link: "Red-Pink-Orange-Paintings" },
+          { name: "Blue, Violet, Mauve Paintings", link: "Blue-Violet-Mauve-Paintings" },
+          { name: "Black, Dark Shades Paintings", link: "Black-Dark-Shades-Paintings" },
+          { name: "White, Light Shades Paintings", link: "White-Light-Shades-Paintings" },
+          { name: "Green Paintings", link: "Green-Paintings" },
+          { name: "Multi-Color Paintings", link: "Multi-Color-Paintings" },
+          { name: "See More >", link: "Shades-More" },
         ],
       },
 
-      
-    ],
-  },
-  {
-    name: "Cultural and Historical",
-    submenu: true,
-    sublinks: [
       {
-        Head: "Australian History",
+        Head: "TYPE",link:"categories",
         sublink: [
-          { name: "Significant Events", link: "/" },
-          { name: "Periods", link: "/" },
-        ],
-      },
-      {
-        Head: "Global Cultures",
-        sublink: [
-          { name: "Inspired by Cultures Worldwide", link: "/" },
-        ],
-      },
-      {
-        Head: "Iconic Figures",
-        sublink: [
-          { name: "Historical Figures", link: "/" },
-          { name: "Contemporary Figures", link: "/" },
-          { name: "Significant to Australia and the World", link: "/" },
+          { name: "All Handmade Paintings", link: "All-Handmade-Paintings" },
+          { name: "All Printed Paintings", link: "All-Printed-Paintings" },
+          { name: "Multi-panel Paintings", link: "Multi-panel-Paintings" },
+          { name: "Handmade Paintings with Sign & Certificate", link: "Handmade-Paintings-Sign-Certificate" },
+          { name: "Handmade Paintings - Single Edition", link: "Handmade-Paintings-Single-Edition" },
+          { name: "Best Selling Handmade Paintings", link: "Best-Selling-Handmade-Paintings" },
+          { name: "Best Selling Printed Paintings", link: "Best-Selling-Printed-Paintings" },
+          { name: "See More >", link: "Type-More" },
         ],
       },
 
-      
+      {
+        Head: "SIZE & ORIENTATION",link:"art-by-size-orientation",
+        sublink: [
+          { name: "Horizontal Paintings", link: "Horizontal-Paintings" },
+          { name: "Square Paintings", link: "Square-Paintings" },
+          { name: "Vertical Paintings", link: "Vertical-Paintings" },
+          { name: "All Customizable Paintings", link: "All-Customizable-Paintings" },
+          { name: "Customizable Handmade Paintings", link: "Customizable-Handmade-Paintings" },
+          { name: "Customizable Printed Paintings", link: "Customizable-Printed-Paintings" },
+          { name: "See More >", link: "Size-Orientation-More" },
+        ],
+      },
     ],
   },
+  {
+    name:"All Arts",link:"/allproduct/full-collections",
+    submenu: false,
+  },
+ 
 ];
+    

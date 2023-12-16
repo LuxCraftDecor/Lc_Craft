@@ -283,59 +283,21 @@ function myState(props) {
 
 
 
-  const[AddAddress,setAddAddress] = useState({
-    pincode:null,
+  const [AddAddress, setAddAddress] = useState({
+    pincode: null,
     state: null,
-    country:null,
-    addressline1:null,
-    addressline2:null,
+    country: null,
+    addressline1: null,
+    addressline2: null,
     time: Timestamp.now(),
-        date: new Date().toLocaleString(
-            "en-US",
-            {
-                month: "short",
-                day: "2-digit",
-                year: "numeric",
-            }
-        )
-  })
+    date: new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    }),
+  });
+  
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    const userUid = storedUser?.user?.uid;
-  
-    const addAddress = async () => {
-      if (!userUid) {
-        return toast.error('User not found in local storage');
-      }
-  
-      if (
-        AddAddress.pincode == null ||
-        AddAddress.state == null ||
-        AddAddress.country == null ||
-        AddAddress.addressline1 == null ||
-        AddAddress.addressline2 == null
-      ) {
-        return toast.error('All fields are required');
-      }
-  
-      try {
-        // Assuming you have a "addresses" collection in your Firebase database
-        const AddressRef = db.collection('addresses').doc(userUid);
-        await AddressRef.set(AddAddress);
-  
-        toast.success('Address stored successfully in Firebase!');
-      } catch (error) {
-        console.error('Error storing address in Firebase:', error);
-        toast.error('Error storing address in Firebase');
-      }
-    };
-  
-    if (userUid) {
-      addAddress();
-    }
-  }, [AddAddress]);
-  
 
 
     return (

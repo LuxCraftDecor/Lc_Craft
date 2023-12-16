@@ -25,6 +25,7 @@ import Luxcraftlogin from './Luxcraftlogin';
 import { AuthProvider, useAuth } from './AuthContext';
 import ImageUpload from './components/Addimg';
 import Myprofile from './pages/Profile/Myprofile';
+import Payment from './pages/Payment/payment';
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
 
           <Route path="/"  element={<Home />} />
         
-          <Route path="/allproducts"  element={<Allproducts />} />
+          <Route path="/allproducts/:slink" element={<Allproducts />} />
 
 
           <Route path="/order" 
@@ -78,6 +79,7 @@ function App() {
               <UpdateProduct/>
             </ProtectedRouteForAdmin>
           } />
+          <Route path='/payment' element={<Payment/>}></Route>
           <Route path="/*" element={<NoPage />} />
         </Routes>
         <ToastContainer/>

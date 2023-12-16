@@ -1,58 +1,67 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { links } from "./Mylinks";
 import { FaChevronUp ,FaChevronDown } from "react-icons/fa";
 
 const NavLinks = () => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
+  const navigate = useNavigate();
+
+  const handleSublinkClick = (slinkLink) => {
+    window.location.href = `/allproducts/${slinkLink}`
+    console.log(slinkName);
+  };
+
+  const handleHeadClick =(mysublink)=>{
+    window.location.href = `/allproducts/${mysublink}`
+    console.log(mysublink);
+  }
+   
   return (
     <>
       {links.map((link) => (
         <div>
-          <div className=" flex px-3 text-left md:cursor-pointer group">
-            <h1
-              className="py-7 text-sm  flex justify-between items-center md:pr-0 pr-1 group"
-              onClick={() => {
+          <div className=" flex px-3 pt-4 flex justify-between text-center  text-center md:cursor-pointer group">
+          <h1
+            className="text-base text-white flex md:pr-0 pr-1 group"
+            onClick={() => {
+              if (link.submenu) {
                 heading !== link.name ? setHeading(link.name) : setHeading("");
                 setSubHeading("");
-              }}
-            >
-              {link.name}
+              }
+            }}
+          >
+            <Link className="text-white" to={link.link}>{link.name}</Link>
+            {link.submenu && (
               <span className="text-sm md:hidden inline">
                 <ion-icon
-                  name={`${heading === link.name ? <FaChevronUp />    : <FaChevronDown />
-
-                    }`}
+                  name={`${heading === link.name ? <FaChevronUp /> : <FaChevronDown />}`}
                 ></ion-icon>
               </span>
-              <span className="text-xl md:mt-1 md:ml-2  md:block hidden group-hover:rotate-180 group-hover:mt-2">
-              <FaChevronDown />
+            )}
+            <span className="text-xl md:mt-1 md:ml-2 md:block hidden group-hover:rotate-180 group-hover:mt-2">
+              {link.submenu && <FaChevronDown />}
+            </span>
+          </h1>
 
-              </span>
-            </h1>
             {link.submenu && (
               <div>
-                <div className="absolute z-10 top-20 hidden group-hover:md:block hover:md:block ">
-                  <div className="py-3">
-                    <div
-                      className="w-4 h-4 left-3 absolute 
-                    mt-1 bg-white rotate-45"
-                    ></div>
-                  </div>
-                  <div className="bg-white p-5 grid grid-cols-3 gap-10">
+                <div className="absolute left-0 w-full z-10 top-28 hidden group-hover:md:block hover:md:block ">
+                  
+                  <div className=" w-full bg-white rounded-2xl border-8 border-blue-900 p-5 grid grid-cols-3 gap-10">
                     {link.sublinks.map((mysublinks) => (
                       <div>
-                        <h1 className="text-lg font-semibold">
+                        <h1 className="text-sm capitalize text-left text-blue-400 hover:text-fuchsia-600  font-semibold" onClick={()=>handleHeadClick(mysublinks.link)} >
                           {mysublinks.Head}
                         </h1>
                         {mysublinks.sublink.map((slink) => (
-                          <li className="text-sm text-gray-600 my-2.5">
+                          <li className="text-xs capitalize  text-left text-black my-2.5">
                             <Link
-                              to={slink.link}
-                              className="hover:text-primary"
+                             
+                              className="hover:text-primary hover:text-pink-600 "
                             >
-                              {slink.name}
+                              <span onClick={()=>handleSublinkClick(slink.link)}>{slink.name} </span>
                             </Link>
                           </li>
                         ))}
@@ -64,12 +73,11 @@ const NavLinks = () => {
             )}
           </div>
           {/* Mobile menus */}
-          <div
+          {/* <div
             className={`
             ${heading === link.name ? "md:hidden" : "hidden"}
           `}
           >
-            {/* sublinks */}
             {link.sublinks.map((slinks) => (
               <div>
                 <div>
@@ -104,7 +112,7 @@ const NavLinks = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       ))}
     </>

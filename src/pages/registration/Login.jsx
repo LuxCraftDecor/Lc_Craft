@@ -26,7 +26,7 @@ function Login() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "colored",
+               
               })
             localStorage.setItem('user', JSON.stringify(result))
          
@@ -69,12 +69,12 @@ function Login() {
                 <div className=' flex justify-center mb-3'>
                     <button
                     onClick={login}
-                        className=' bg-yellow-500 w-full text-black font-bold  px-2 py-2 rounded-lg'>
+                        className=' bg-white w-full text-black font-bold  px-2 py-2 rounded-lg'>
                         Login
                     </button>
                 </div>
                 <div>
-                    <h2 className='text-white'>Don't have an account <Link className=' text-yellow-500 font-bold' to={'/signup'}>Signup</Link></h2>
+                    <h2 className='text-white'>Don't have an account <Link className=' text-white font-bold' to={'/signup'}>Signup</Link></h2>
                 </div>
             </div>
         </div>
