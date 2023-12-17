@@ -15,7 +15,7 @@ export default function Luxcraftlogin() {
       console.log('Login successful!');
       login();
       console.log('isLoggedIn:', isLoggedIn); // Log the authentication state
-      navigate('/');
+      navigate('/home');
     } else {
       console.log('Invalid username or password');
     }

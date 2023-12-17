@@ -31,7 +31,7 @@ function Login() {
             localStorage.setItem('user', JSON.stringify(result))
          
     
-            navigate('/')
+            navigate('/home')
             setLoading(false)
             
         } catch (error) {

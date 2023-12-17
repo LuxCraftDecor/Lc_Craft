@@ -25,7 +25,7 @@ import Luxcraftlogin from './Luxcraftlogin';
 import { AuthProvider, useAuth } from './AuthContext';
 import ImageUpload from './components/Addimg';
 import Myprofile from './pages/Profile/Myprofile';
-import Payment from './pages/Payment/payment';
+import Payment from './payment';
 
 function App() {
   return (
@@ -33,53 +33,56 @@ function App() {
     <MyState>
       <Router>
         <Routes>
-          {/* <Route path="/" element={< MyComingSoonPage/>}></Route>
+          <Route path="/" element={< MyComingSoonPage/>}></Route>
 
 
-          <Route path="/Luxcraftadmin" element={<Luxcraftlogin />}></Route> */}
+          <Route path="/Luxcraftadmin" element={<Luxcraftlogin />}></Route>
 
-          <Route path="/"  element={<Home />} />
+          <Route path="/home"  element={<ProtectedLuxcraft element={<Home />}/>} />
         
-          <Route path="/allproducts/:slink" element={<Allproducts />} />
+          <Route path="/allproducts/:slink" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
 
 
           <Route path="/order" 
-          element={
+          element={<ProtectedLuxcraft element={
             <ProtectedRoute>
               <Order />
             </ProtectedRoute>
-          }
+          }/>}
+          
          />
 
 
-          <Route path="/cart"  element={<Cart />}/>
+          <Route path="/cart"  element={<ProtectedLuxcraft element={<Cart />}/>}/>
 
 
-          <Route path="/dashboard"  element={
+          <Route path="/dashboard"  element={<ProtectedLuxcraft element={
             <ProtectedRouteForAdmin>
               <Dashboard />
             </ProtectedRouteForAdmin>
-          }  />
+          }/>}  />
 
 
-          <Route path='/login'  element={<Login/>}  />
-          <Route path='/signup'  element={<Signup/>}  />
-          <Route path='/myProfile/:activepage'  element={<Myprofile/>} />
+          <Route path='/login'  element={<ProtectedLuxcraft element={<Login/>}/>}  />
+          <Route path='/signup'  element={<ProtectedLuxcraft
+          element={<Signup/>} 
+          />} />
+          <Route path='/myProfile/:activepage'  element={<ProtectedLuxcraft element={<Myprofile/>}/>} />
 
-          <Route path='/productinfo/:id'  element={<ProductInfo/>} />
-          <Route path='/addimg'  element={<ImageUpload/>}/>
+          <Route path='/productinfo/:id' element={<ProtectedLuxcraft  element={<ProductInfo/>}/>} />
+          <Route path='/addimg'  element={<ProtectedLuxcraft element={<ImageUpload/>}/>}/>
 
-          <Route path='/addproduct'  element={
+          <Route path='/addproduct' element={<ProtectedLuxcraft  element={
             <ProtectedRouteForAdmin>
               <AddProduct/>
             </ProtectedRouteForAdmin>
-          }  />
-          <Route path='/updateproduct'  element={
+          } />} />
+          <Route path='/updateproduct' element={<ProtectedLuxcraft  element={
             <ProtectedRouteForAdmin>
               <UpdateProduct/>
             </ProtectedRouteForAdmin>
-          } />
-          <Route path='/payment' element={<Payment/>}></Route>
+          }/>} />
+          <Route path='/payment' element={<ProtectedLuxcraft element={<Payment/>}/>}></Route>
           <Route path="/*" element={<NoPage />} />
         </Routes>
         <ToastContainer/>
@@ -118,10 +121,10 @@ const ProtectedRouteForAdmin = ({children})=> {
 
 
 
-// const ProtectedLuxcraft = ({ element }) => {
-//   const { isLoggedIn } = useAuth();
+const ProtectedLuxcraft = ({ element }) => {
+  const { isLoggedIn } = useAuth();
 
-//   return isLoggedIn ? element :element ;
+  return isLoggedIn ? element :<Navigate to={'/*'}/> ;
   
-// };
-// {/* <Navigate to={'/*'}/> */}
+};
+{/* <Navigate to={'/*'}/> */}
