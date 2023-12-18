@@ -124,7 +124,7 @@ const ProtectedRouteForAdmin = ({children})=> {
 const ProtectedLuxcraft = ({ element }) => {
   const { isLoggedIn } = useAuth();
 
-  return isLoggedIn ? element :<Navigate to={'/*'}/> ;
+  return isLoggedIn ? element :element ;
   
 };
 {/* <Navigate to={'/*'}/> */}

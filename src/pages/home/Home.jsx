@@ -10,6 +10,7 @@ import Testimonial from '../../components/testimonial/Testimonial'
 
 import { Link } from 'react-router-dom'
 import MenuItems from '../menu/MenuItems'
+import Sortprotuctcard from '../../components/productCard/sortprotuctcard'
 
 
 function Home() {
@@ -28,6 +29,7 @@ function Home() {
         </Link>
       </div> */}
       {/* <Track /> */}
+      <Sortprotuctcard/>
       <Testimonial />
     </Layout>
   )
