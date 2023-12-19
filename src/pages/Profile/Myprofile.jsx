@@ -47,6 +47,22 @@ export default function Myprofile() {
            </div>
           {/* <Footer1/>
           <Footer2/> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
     )
 }

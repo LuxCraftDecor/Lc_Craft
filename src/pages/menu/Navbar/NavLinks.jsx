@@ -10,12 +10,19 @@ const NavLinks = () => {
 
   const handleSublinkClick = (slinkLink) => {
     window.location.href = `/allproducts/${slinkLink}`
-    console.log(slinkName);
   };
 
   const handleHeadClick =(mysublink)=>{
     window.location.href = `/allproducts/${mysublink}`
-    console.log(mysublink);
+  }
+  const handleNameClick =(mylink) =>{
+    if(mylink === "full-collections"){
+      window.location.href =( `/allproducts/${mylink}`)
+
+    }else{
+      window.location.href = '/home'
+
+    }
   }
    
   return (
@@ -32,7 +39,7 @@ const NavLinks = () => {
               }
             }}
           >
-            <Link className="text-white" to={link.link}>{link.name}</Link>
+            <Link className="text-white" onClick={()=>handleNameClick(link.link)}>{link.name}</Link>
             {link.submenu && (
               <span className="text-sm md:hidden inline">
                 <ion-icon
@@ -47,7 +54,7 @@ const NavLinks = () => {
 
             {link.submenu && (
               <div>
-                <div className="absolute left-0 w-full z-10 top-28 hidden group-hover:md:block hover:md:block ">
+                <div className="absolute left-0 w-full z-10 top-36 hidden group-hover:md:block hover:md:block ">
                   
                   <div className=" w-full bg-white rounded-2xl border-8 border-blue-900 p-5 grid grid-cols-3 gap-10">
                     {link.sublinks.map((mysublinks) => (
