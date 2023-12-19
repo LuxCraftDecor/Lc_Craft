@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Timestamp, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, setDoc,getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { fireDB } from '../../fireabase/FirebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 function myState(props) {
     const [mode, setMode] = useState('light');
-
+    const navigate = useNavigate();
     const toggleMode = () => {
         if (mode === 'light') {
             setMode('dark');
@@ -83,7 +84,7 @@ function myState(props) {
 
             toast.success("Add product successfully");
             setTimeout(() => {
-                window.location.href = '/dashboard'
+                navigate('/dashboard')
             }, 800);
             getProductData();
             setLoading(false)
@@ -143,7 +144,7 @@ function myState(props) {
             await setDoc(doc(fireDB, 'products', products.id), products)
             toast.success("Product Updated successfully")
             setTimeout(() => {
-                window.location.href = '/dashboard'
+                navigate('/dashboard')
             }, 800);
             getProductData();
             setLoading(false)

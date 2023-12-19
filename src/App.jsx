@@ -30,8 +30,9 @@ import Payment from './payment';
 function App() {
   return (
     <AuthProvider>
-    <MyState>
+    
       <Router>
+      <MyState>
         <Routes>
           <Route path="/" element={< MyComingSoonPage/>}></Route>
 
@@ -86,8 +87,9 @@ function App() {
           <Route path="/*" element={<NoPage />} />
         </Routes>
         <ToastContainer/>
+        </MyState>
       </Router>
-    </MyState>
+   
     </AuthProvider>
   )
 }

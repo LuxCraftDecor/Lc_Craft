@@ -9,21 +9,20 @@ const NavLinks = () => {
   const navigate = useNavigate();
 
   const handleSublinkClick = (slinkLink) => {
-    window.location.href = `/allproducts/${slinkLink}`
+    console.log();
   };
 
   const handleHeadClick =(mysublink)=>{
-    window.location.href = `/allproducts/${mysublink}`
+    navigate(`/allproducts/${mysublink}`)
+    console.log(mysublink);
   }
-  const handleNameClick =(mylink) =>{
-    if(mylink === "full-collections"){
-      window.location.href =( `/allproducts/${mylink}`)
-
-    }else{
-      window.location.href = '/home'
-
+  const handleNameClick = (mylink) => {
+    if (mylink === "full-collections") {
+      navigate(`/allproducts/${mylink}`);
+    } else {
+      navigate('/home');
     }
-  }
+  };
    
   return (
     <>
@@ -37,10 +36,24 @@ const NavLinks = () => {
                 heading !== link.name ? setHeading(link.name) : setHeading("");
                 setSubHeading("");
               }
-            }}
-          >
-            <Link className="text-white" onClick={()=>handleNameClick(link.link)}>{link.name}</Link>
-            {link.submenu && (
+            }} >
+                      
+                      <Link
+                  className="text-white"
+                  to={
+                    link.link === "full-collections"
+                      ? `/allproducts/${link.link}`
+                      : link.link === "limited-edition"
+                      ? `/allproducts/${link.link}`
+                      : "/home"
+                  }
+                >
+               {link.name}
+                 </Link>
+
+               
+                      
+         {link.submenu && (
               <span className="text-sm md:hidden inline">
                 <ion-icon
                   name={`${heading === link.name ? <FaChevronUp /> : <FaChevronDown />}`}
@@ -65,10 +78,10 @@ const NavLinks = () => {
                         {mysublinks.sublink.map((slink) => (
                           <li className="text-xs capitalize  text-left text-black my-2.5">
                             <Link
-                             
+                              to={`/allproducts/${slink.link}`}
                               className="hover:text-primary hover:text-pink-600 "
                             >
-                              <span onClick={()=>handleSublinkClick(slink.link)}>{slink.name} </span>
+                              <span >{slink.name} </span>
                             </Link>
                           </li>
                         ))}

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import {BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill} from "react-icons/bs";
 import image1 from '../../assets/beautiful_painting_art_of_krishna_hd_krishna-1920x1080.jpg'
-import image2 from '../../assets/image2.jpg'
+import image2 from '../../assets/Buddhist .png'
 import image3 from '../../assets/image3.png'
 import image4 from '../../assets/image4.jpg'
 
