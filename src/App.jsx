@@ -94,7 +94,6 @@ function App() {
 
 export default App 
 
-// user 
 
 export const ProtectedRoute = ({children}) => {
   const user = localStorage.getItem('user')

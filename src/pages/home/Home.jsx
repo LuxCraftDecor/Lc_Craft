@@ -21,7 +21,7 @@ function Home() {
       {/* <HeroSection /> */}
 
       {/* <Filter /> */}
-    
+      <Sortprotuctcard/>
       <ProductCard />
       {/* <div className="flex justify-center -mt-10 mb-4">
         <Link to={'/allproducts'}>
@@ -29,7 +29,7 @@ function Home() {
         </Link>
       </div> */}
       {/* <Track /> */}
-      <Sortprotuctcard/>
+     
       <Testimonial />
     </Layout>
   )

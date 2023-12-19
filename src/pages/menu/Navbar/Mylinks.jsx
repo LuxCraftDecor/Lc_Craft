@@ -1,7 +1,7 @@
 
 export const links = [
   {
-    name:"Home",link:"/",
+    name:"Home",link:"",
     submenu: false,
   },
 
@@ -166,7 +166,11 @@ export const links = [
     ],
   },
   {
-    name:"All Arts",link:"/allproduct/full-collections",
+    name:"All Arts",link:"full-collections",
+    submenu: false,
+  },
+  {
+    name:"Limited Edition",link:"limited-edition",
     submenu: false,
   },
  

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import myContext from '../../context/data/myContext';
-import style from './sortproduct.module.css';
-
+import image1 from '../../assets/bgimage.jpg'
 export default function Sortprotuctcard() {
+
   const context = useContext(myContext);
   const { mode, product } = context;
   const handmadePaintings = product.filter((item) => item.productType === 'Handmade Painting');
@@ -15,68 +15,108 @@ export default function Sortprotuctcard() {
   const sixthHandmadePainting = handmadePaintings.length > 5 ? handmadePaintings[5] : null;
 
   const handlechangehandmade = () => {
-    // Your handling logic for the images
   };
 
   return (
-    <div className="w-[100%] flex justify-center bg-white	" >
-      <h1>SHOP HANDMADE PAINTINGS</h1>
-      <div className="relative w-[784px] h-[780px] bg-red-700 pt-10">
-        {firstHandmadePainting && (
+    <div className="w-[100%] 	" >
+        <img src={image1} alt='bgimage' style={{ width:'100%', objectFit: 'cover', position: 'absolute', zIndex: -1, backgroundColor:'rgb(136, 171, 142,)' }}/>
+
+      
+      <div className=" w-full pl-20 pt-5">
+            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
+            <div className="h-1 w-20 bg-pink-600 rounded"></div>
+                </div>
+      <div className='flex justify-center items-center m-10 '>
+      <div className="relative gap-4 flex bg-[#88AB8E] p-10 shadow-2xl shadow-stone-300">
+
+       <div className='flex flex-col space-y-4 '>
+        <div className='flex gap-4 '>
+            <div >
+            {firstHandmadePainting && (
           <img
             key={firstHandmadePainting.id}
-            className="absolute w-[142px] h-[209px] top-[70px] left-[90px] object-cover"        
+            className='w-48 h-52'       
             alt={firstHandmadePainting.productType}
             src={firstHandmadePainting.imageUrl}
             onClick={handlechangehandmade}
           />
         )}
-        {secondHandmadePainting && (
+            </div>
+            <div >
+         {secondHandmadePainting && (
           <img
             key={secondHandmadePainting.id}
-            className="absolute w-[142px] h-[209px] top-[71px] left-[251px] object-cover"         
+            className='w-48 h-52'         
                alt={secondHandmadePainting.productType}
             src={secondHandmadePainting.imageUrl}
             onClick={handlechangehandmade}
           />
         )}
-        {thirdHandmadePainting && (
-          <img
-            key={thirdHandmadePainting.id}
-            className="absolute w-[142px] h-[209px] top-[513px] left-[419px] object-cover"          
-              alt={thirdHandmadePainting.productType}
-            src={thirdHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
-          />
-        )}
-        {fourthHandmadePainting && (
-          <img
-            key={fourthHandmadePainting.id}
-            className="absolute w-[142px] h-[209px] top-[514px] left-[576px] object-cover"           
-             alt={fourthHandmadePainting.productType}
-            src={fourthHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
-          />
-        )}
-        {fifthHandmadePainting && (
-          <img
-            key={fifthHandmadePainting.id}
-            className="absolute w-[304px] h-[416px] top-[71px] left-[414px] object-cover"           
-             alt={fifthHandmadePainting.productType}
-            src={fifthHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
-          />
-        )}
-        {sixthHandmadePainting && (
+        </div>
+       
+       
+        </div>
+       <div className=''>  
+        
+       {sixthHandmadePainting && (
           <img
             key={sixthHandmadePainting.id}
-            className="absolute w-[303px] h-[416px] top-[306px] left-[90px] object-cover"           
+            className="w-[25rem] h-80 "           
              alt={sixthHandmadePainting.productType}
             src={sixthHandmadePainting.imageUrl}
             onClick={handlechangehandmade}
           />
         )}
+       </div>
+
+       </div>
+
+       <div className='flex flex-col space-y-4'>
+       <div className='w-full'>  
+        
+        {fifthHandmadePainting && (
+           <img
+             key={fifthHandmadePainting.id}
+             className="w-[25rem] h-80  "            
+              alt={fifthHandmadePainting.productType}
+             src={fifthHandmadePainting.imageUrl}
+             onClick={handlechangehandmade}
+           />
+         )}
+        </div>
+        <div className='flex space-x-5 '>
+            <div >
+            {thirdHandmadePainting && (
+          <img
+            key={thirdHandmadePainting.id}
+            className='w-48 h-52'       
+            alt={thirdHandmadePainting.productType}
+            src={thirdHandmadePainting.imageUrl}
+            onClick={handlechangehandmade}
+          />
+        )}
+            </div>
+            <div >
+         {fourthHandmadePainting && (
+          <img
+            key={fourthHandmadePainting.id}
+            className='w-48 h-52'         
+               alt={fourthHandmadePainting.productType}
+            src={fourthHandmadePainting.imageUrl}
+            onClick={handlechangehandmade}
+          />
+        )}
+        </div>
+       
+       
+        </div>
+       
+
+       </div>
+      
       </div>
+      </div>
+      
     </div>
   );
 }

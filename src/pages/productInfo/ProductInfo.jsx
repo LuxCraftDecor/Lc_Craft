@@ -17,7 +17,8 @@ import { TiShoppingCart } from "react-icons/ti";
 
 function ProductInfo() {
     const context = useContext(myContext);
-    const { loading, setLoading } = context;
+    const {product, loading, setLoading } = context;
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     const [products, setProducts] = useState('')
     const params = useParams()
@@ -36,6 +37,24 @@ function ProductInfo() {
             setLoading(false)
         }
     }
+    const getRelatedProducts = () => {
+      // Filter products based on the matching criteria
+      const matchingProducts = product.filter((item) => {
+          return (
+              item.productType === products.productType &&
+              item.category === products.category &&
+              item.id !== params.id // Exclude the current product
+          );
+      });
+
+      // Shuffle the array to get a random order
+      const shuffledProducts = matchingProducts.sort(() => Math.random() - 0.5);
+
+      // Select the first four products
+      const selectedProducts = shuffledProducts.slice(0, 4);
+
+      setRelatedProducts(selectedProducts);
+  };
 
 
     useEffect(() => {
@@ -43,13 +62,11 @@ function ProductInfo() {
 
     }, [])
 
-
-
-    const dispatch = useDispatch()
-    const cartItems = useSelector((state) => state.cart)
-  
-
-
+    useEffect(() => {
+      if (products) {
+          getRelatedProducts();
+      }
+  }, [products, product]);
 
 
     const [count, setCount] = useState(0);
@@ -292,6 +309,17 @@ function ProductInfo() {
 
                 </div>
             </section>
+            <h3>Related Products</h3>
+            <ul>
+                {relatedProducts.map((relatedProduct) => (
+                    <div key={relatedProduct.id}>
+                      <h1>{relatedProduct.title}</h1>
+                      <img src={relatedProduct.imageUrl}/>
+                    </div>
+                    
+                    // Display other related product details as needed
+                ))}
+            </ul>
         
 
         </Layout>
