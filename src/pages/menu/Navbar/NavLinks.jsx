@@ -8,27 +8,19 @@ const NavLinks = () => {
   const [subHeading, setSubHeading] = useState("");
   const navigate = useNavigate();
 
-  const handleSublinkClick = (slinkLink) => {
-    console.log();
-  };
+
 
   const handleHeadClick =(mysublink)=>{
     navigate(`/allproducts/${mysublink}`)
     console.log(mysublink);
   }
-  const handleNameClick = (mylink) => {
-    if (mylink === "full-collections") {
-      navigate(`/allproducts/${mylink}`);
-    } else {
-      navigate('/home');
-    }
-  };
+
    
   return (
     <>
       {links.map((link) => (
         <div>
-          <div className=" flex px-3 pt-4 flex justify-between text-center  text-center md:cursor-pointer group">
+          <div className=" flex px-3 justify-between text-center  text-center md:cursor-pointer group">
           <h1
             className="text-base text-white flex md:pr-0 pr-1 group"
             onClick={() => {
@@ -39,12 +31,12 @@ const NavLinks = () => {
             }} >
                       
                       <Link
-                  className="text-white"
+                  className="text-white text-sm capitalize"
                   to={
                     link.link === "full-collections"
                       ? `/allproducts/${link.link}`
                       : link.link === "limited-edition"
-                      ? `/allproducts/${link.link}`
+                      ? '/limited-edition'
                       : "/home"
                   }
                 >
@@ -60,7 +52,7 @@ const NavLinks = () => {
                 ></ion-icon>
               </span>
             )}
-            <span className="text-xl md:mt-1 md:ml-2 md:block hidden group-hover:rotate-180 group-hover:mt-2">
+            <span className="text-sm md:mt-1 md:ml-2 md:block hidden group-hover:rotate-180 group-hover:mt-2">
               {link.submenu && <FaChevronDown />}
             </span>
           </h1>

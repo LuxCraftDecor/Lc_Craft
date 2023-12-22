@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import logo from '../../assets/Luxcraft logo_line.png';
 import { IoPerson } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
+import Menubar from '../../pages/menu/Navbar';
 
 function Navbar() {
   const context = useContext(myContext);
@@ -33,9 +34,9 @@ function Navbar() {
     navigate('/login')
   }
 
-
+  // sticky top-0 z-50
   return (
-    <div className='bg-white sticky top-0 z-50 font-serif'>
+    <div className='bg-white  '>  
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
           <Transition.Child
@@ -142,12 +143,12 @@ function Navbar() {
       </Transition.Root>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-blue-600 px-4 text-base font-medium text-white sm:px-6 lg:px-8" 
+        <p className="flex h-10 items-center justify-center bg-decor-100 px-4  text-base font-medium text-black sm:px-6 lg:px-8" 
         style={{ backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '', color: mode === 'dark' ? 'white' : '', }}>
         !Introductory offer for first 100 customers avail 30% flat discount. USE CODE: xxxxxx
         </p>
 
-        <nav aria-label="Top" className="bg-[#fefefe] px-4 sm:px-6 lg:px-8 shadow-xl " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <nav aria-label="Top" className="bg-decor-200 px-4 sm:px-6 lg:px-8 shadow-xl " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
           <div className="">
             <div className="flex h-16 items-center">
               <button
@@ -368,6 +369,7 @@ function Navbar() {
           </div>
         </nav>
       </header>
+      <Menubar/>
     </div>
   )
 }

@@ -35,7 +35,7 @@ export const links = [
         ],
       },
       {
-        Head: "LANDSCAPE PAINTINGS",link:"landscape-paintings",
+        Head: "LANDSCAPE PAINTINGS",link:"LandscapePaintings",
         sublink: [
           { name: "Nature, Forest, Scenery", link: "Nature-Forest-Scenery" },
           { name: "Ship, Sea, Beach", link: "Ship-Sea-Beach" },

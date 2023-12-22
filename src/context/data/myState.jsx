@@ -27,10 +27,6 @@ function myState(props) {
         artistname: null,
         price: null,
         imageUrl: null,
-        subImageUrl1:null,
-        subImageUrl2:null,
-        subImageUrl3:null,
-        subImageUrl4:null,
         category: null,
         width: null,
         height: null,
@@ -39,9 +35,9 @@ function myState(props) {
         color: null,
         material: null,
         orientation: null,
-        quantity: null,
-        certificateProvided: null,
+        stock: null,
         description: null,
+        subImages: [''],
         time: Timestamp.now(),
         date: new Date().toLocaleString(
             "en-US",
@@ -54,6 +50,7 @@ function myState(props) {
     });
 
     const addProduct = async () => {
+
         if (products.title == null || 
             products.price == null || 
             products.imageUrl == null || 
@@ -67,11 +64,10 @@ function myState(props) {
             products.color == null ||
             products.material == null ||
             products.orientation == null ||
-            products.quantity ==null ||
-            products.certificateProvided == null 
-            
+            products.stock ==null             
             
             ) {
+               
             return toast.error("all fields are required")
         }
 
@@ -282,6 +278,40 @@ function myState(props) {
   };
 
 
+  const handleCounterChange = async (itemId, action) => {
+    setLoading(true);
+  
+    try {
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      const userUid = storedUser?.user?.uid;
+  
+      const userCartRef = doc(fireDB, 'carts', userUid);
+  
+      const userCartDoc = await getDoc(userCartRef);
+  
+      if (userCartDoc.exists()) {
+        const updatedCartItems = userCartDoc.data().cartItems.map(item => {
+          if (item.id === itemId) {
+            // Update the quantity based on the action (increase/decrease)
+            item.quantity = action === 'increase' ? item.quantity + 1 : Math.max(item.quantity - 1, 1);
+          }
+          return item;
+        });
+  
+        await setDoc(userCartRef, { cartItems: updatedCartItems });
+        toast.success(`Quantity updated successfully for item: ${itemId}`);
+        setCartProductsFromFirestore(updatedCartItems);
+      }
+  
+      setLoading(false);
+    } catch (error) {
+      console.error('Error updating cart item quantity in Firestore:', error);
+      setLoading(false);
+    }
+  };
+  
+
+
 
 
   const [AddAddress, setAddAddress] = useState({
@@ -307,7 +337,7 @@ function myState(props) {
             products, setProducts, addProduct, product,
             edithandle, updateProduct, deleteProduct, order,
             user, searchkey, setSearchkey,filterType,setFilterType,
-            filterPrice,setFilterPrice, cartProductsFromFirestore ,deleteCartItemFromFirestore, AddAddress
+            filterPrice,setFilterPrice, cartProductsFromFirestore ,deleteCartItemFromFirestore, AddAddress, handleCounterChange
         }}>
             {props.children}
         </MyContext.Provider>

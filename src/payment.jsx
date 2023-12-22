@@ -114,36 +114,25 @@
 //   );
 // };
 
-import styles from './payment.module.css'
-import { CreditCard, PaymentForm } from 'react-square-web-payments-sdk';
+// src/PaymentForm.js
+import React from 'react';
+import { Elements } from '@stripe/react-stripe-js';
+import PaymentForm from './paymentForm';
+import stripePromise from './stripContext';
 
-export default function Payment() {
+const Payment= () => {
+
+
   return (
-    <div className={styles.container}>
-      <PaymentForm
-        applicationId="sandbox-sq0idb-8HsLMLBJjb8Ru58Z0gPvng"
-        cardTokenizeResponseReceived={async (token, verifiedBuyer) => {
-          console.log('token:', token);
-          console.log('verifiedBuyer:', verifiedBuyer);
-        }}
-      
-        locationId='LFVA7B7CRJ019'
-      >
-        <CreditCard
-          buttonProps={{
-            css: {
-              backgroundColor: "#771520",
-              fontSize: "14px",
-              color: "#fff",
-              "&:hover": {
-                backgroundColor: "#530f16",
-              },
-            },
-          }} />
+    <div>
+    <h1>Stripe Client-Only App</h1>
+    <Elements stripe={stripePromise}>
+      <PaymentForm />
+    </Elements>
+  </div>
 
-      </PaymentForm>
-    </div>
-  )
-}
+  );
+};
 
+export default Payment;
 

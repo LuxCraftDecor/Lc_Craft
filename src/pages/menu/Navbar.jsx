@@ -8,7 +8,7 @@ const Menubar = () => {
                 <div className="btn-group" >
                     
 
-                <ul className="md:flex hidden uppercase justify-center bg-black h-14 items-center ">
+                <ul className="md:flex hidden uppercase justify-center bg-black h-10 items-center ">
           
           <NavLinks />
         </ul>
