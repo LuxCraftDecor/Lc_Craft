@@ -25,6 +25,7 @@ import Luxcraftlogin from './Luxcraftlogin';
 import { AuthProvider, useAuth } from './AuthContext';
 import ImageUpload from './components/Addimg';
 import Myprofile from './pages/Profile/Myprofile';
+import LimitedEdition from './components/productCard/LimitedEdition';
 import Payment from './payment';
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
           <Route path="/home"  element={<ProtectedLuxcraft element={<Home />}/>} />
         
           <Route path="/allproducts/:slink" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
+          <Route path="/limited-edition" element={<ProtectedLuxcraft  element={<LimitedEdition />}/>} />
+
 
 
           <Route path="/order" 

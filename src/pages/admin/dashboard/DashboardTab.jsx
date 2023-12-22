@@ -6,6 +6,7 @@ import { MdOutlineProductionQuantityLimits } from 'react-icons/md'
 import { FaUser, FaCartPlus } from 'react-icons/fa';
 import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
+import { MdDrafts, MdPublish, MdOutlinePublishedWithChanges } from "react-icons/md";
 
 function DashboardTab() {
     const context = useContext(myContext)
@@ -49,6 +50,14 @@ navigate('/addproduct')
                                 <button type="button" className="font-medium border-b-2 border-green-500 bg-[#605d5d12] text-green-500 rounded-lg text-xl  hover:shadow-green-700 shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]   px-5 py-1.5 text-center ">
                                     <div className="flex gap-2 items-center">
                                         <FaUser /> Users
+                                    </div>
+                                </button>
+                            </Tab>
+
+                            <Tab>
+                                <button type="button" className="font-medium border-b-2 border-green-500 bg-[#605d5d12] text-green-500 rounded-lg text-xl  hover:shadow-green-700 shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]   px-5 py-1.5 text-center ">
+                                    <div className="flex gap-2 items-center">
+                                    <MdDrafts /> Draft
                                     </div>
                                 </button>
                             </Tab>
@@ -117,7 +126,7 @@ navigate('/addproduct')
                                                             {title}
                                                         </td>
                                                         <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
-                                                            ₹{price}
+                                                            ${price}
                                                         </td>
                                                         <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
                                                             {category}
@@ -297,6 +306,105 @@ navigate('/addproduct')
                                     )
                                    })}
                                 </table>
+                            </div>
+                        </TabPanel>
+
+
+
+                        <TabPanel>
+                            <div className='  px-4 md:px-0 mb-16'>
+                                <h1 className=' text-center mb-5 text-3xl font-semibold underline' style={{ color: mode === 'dark' ? 'white' : '' }}>Draft Details</h1>
+                                <div className=" flex justify-end">
+                                    <button
+                                        onClick={handleAdd}
+                                        type="button"
+                                        className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} > <div className="flex gap-2 items-center">
+                                            Add Product <FaCartPlus size={20} />
+                                        </div>
+                                        </button>
+
+                                        <button
+                                       
+                                        type="button"
+                                        className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} > 
+                                        <Link to={'/addimg'} className="flex gap-2 items-center">
+                                            Add Image <FaCartPlus size={20} />
+                                        </Link>
+                                        </button>
+                                </div>
+                                <div className="relative overflow-x-auto ">
+                                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
+                                        <thead className="text-xs border border-gray-600 text-black uppercase bg-gray-200 shadow-[inset_0_0_8px_rgba(0,0,0,0.6)]" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
+                                            <tr>
+                                                <th scope="col" className="px-6 py-3">
+                                                    S.No
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Image
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Title
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Price
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Category
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Date
+                                                </th>
+                                                <th scope="col" className="px-6 py-3">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        {product.map((item, index) => {
+                                            const { title, price, imageUrl, category, description, date } = item;
+                                            return (
+                                                <tbody className=''>
+                                                    <tr className="bg-gray-50 border-b  dark:border-gray-700" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
+                                                        <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                            {index + 1}.
+                                                        </td>
+                                                        <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                                            <img className='w-16' src={imageUrl} alt="img" />
+                                                        </th>
+                                                        <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                            {title}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                            ${price}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                            {category}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                            {date}
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            <div className=" flex gap-2">
+                                                                <div className=" flex gap-2 cursor-pointer text-black " style={{ color: mode === 'dark' ? 'white' : '' }}>
+                                                                   
+
+                                                                    <Link to={'/updateproduct'}>
+                                                                        <div onClick={() => edithandle(item)}  >
+                                                                        <MdPublish /> <MdOutlinePublishedWithChanges />
+
+                                                                        </div>
+                                                                    </Link>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            )
+                                        })}
+                                    </table>
+
+                                </div>
                             </div>
                         </TabPanel>
 

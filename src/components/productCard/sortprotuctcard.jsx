@@ -23,7 +23,7 @@ export default function Sortprotuctcard() {
 
       
       <div className=" w-full pl-20 pt-5">
-            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
+            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-blue-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
             <div className="h-1 w-20 bg-pink-600 rounded"></div>
                 </div>
       <div className='flex justify-center items-center m-10 '>

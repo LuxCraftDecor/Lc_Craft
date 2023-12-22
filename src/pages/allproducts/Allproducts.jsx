@@ -12,7 +12,7 @@ function Allproducts() {
   const navigate = useNavigate();
   const location = useLocation();
   const { slink } = useParams();
-  
+  console.log(slink);
 
   const context = useContext(myContext);
 
@@ -21,11 +21,13 @@ function Allproducts() {
   
   } = context;
 
-  // useEffect(() => {
-  //   // Use the category from the URL
-  //   const category = params.category;
-  //   setSelectedCategory(category);
-  // }, [params.category]);
+  useEffect(() => {
+    if (slink) {
+      // If slink is present, prioritize it for filtering
+      setSelectedCategory(slink);
+    }
+  }, [slink]);
+  
  // ----------- Radio Filtering -----------
  const handleChange = (event) => {
   setSelectedCategory(event.target.value);
@@ -41,14 +43,17 @@ function filteredData(products, selected) {
     return products; // Return all products if no category is selected
   }
 
-  return products.filter(({ category, productType, orientation, color, price, title }) =>
+  return products.filter(({ category, productType, orientation, color, price, title, description }) =>
     // Modify the conditions based on your actual data structure
     category === selected ||
     color === selected ||
     price === selected ||
     title === selected ||
     orientation === selected ||
-    productType === selected
+    productType === selected ||
+    description.toLowerCase().includes(selected.toLowerCase()) ||
+    productType.toLowerCase().includes(selected.toLowerCase()) ||
+    category.toLowerCase().includes(selected.toLowerCase())
   );
   
 }

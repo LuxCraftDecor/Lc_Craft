@@ -9,8 +9,9 @@ import { fireDB } from '../../fireabase/FirebaseConfig';
 import { FaFacebookF,FaPinterest,FaShare   } from "react-icons/fa";
 import { FaInstagram,  } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import { BsTwitterX } from "react-icons/bs";
+import { BsLightningChargeFill } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
+import imageu from '../../assets/Buddhist Culture_product.png';
 
 
 
@@ -144,14 +145,68 @@ function ProductInfo() {
 
 
 
-    const image1 = products && products.subImageUrl1;
-    const image2 = products && products.subImageUrl2;
-    const image3 = products && products.subImageUrl3;
-    const image4 = products && products.subImageUrl4;
-    const image5 = products && products.imageUrl;
-    const photos = [image1, image2, image3, image4,image5].filter(url => url !== '');
+      const addCart = async (product, quantity = 1) => {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+    
+        // Check if the user is logged in and user details are present
+        if (storedUser && storedUser.user && storedUser.user.uid) {
+            const userUid = storedUser.user.uid;
+    
+            // Get the reference to the user's cart in Firestore
+            const userCartRef = doc(fireDB, "carts", userUid);
+    
+            // Get the existing cart data
+            const userCartDoc = await getDoc(userCartRef);
+            const existingCart = userCartDoc.exists() ? userCartDoc.data().cartItems : [];
+    
+            // Check if the product is already in the cart
+            const existingProductIndex = existingCart.findIndex(item => item.id === product.id);
+    
+            if (existingProductIndex !== -1) {
+                // If the product is already in the cart, update the quantity
+                existingCart[existingProductIndex].quantity += quantity;
+            } else {
+                // If the product is not in the cart, add it with the specified quantity
+                existingCart.push({ ...product, quantity });
+            }
+    
+            // Update the cart in Firestore
+            await setDoc(userCartRef, { cartItems: existingCart });
+    
+            // Notify the user
+            toast.success('Added to cart and updated in Firebase database');
+        } else {
+            const localCart = JSON.parse(localStorage.getItem('localCart')) || [];
+            const existingProductIndex = localCart.findIndex(item => item.id === product.id);
+    
+            if (existingProductIndex !== -1) {
+                // If the product is already in the local cart, update the quantity
+                localCart[existingProductIndex].quantity += quantity;
+            } else {
+                // If the product is not in the local cart, add it with the specified quantity
+                localCart.push({ ...product, quantity });
+            }
+    
+            // Store the cart in local storage
+            localStorage.setItem('localCart', JSON.stringify(localCart));
+    
+            // Notify the user
+            toast.success('Added to local cart');
+        }
+    };
+    
 
-         
+
+
+
+    const image1 = products && products.subImages[0];
+    const image2 = products && products.subImages[1];
+    const image3 = products && products.subImages[2];
+    const image4 = products && products.subImages[3];
+    const image5 = [imageu]
+    const photos = [image1, image2, image3, image4,image5].filter(url => url !== '');
+    const imagesArray = [image1, image2, image3, image4, image5].filter(url => url !== '');
+
       
       const [preview, setPreview] = useState();
       useEffect(() => {
@@ -174,50 +229,63 @@ function ProductInfo() {
     return (
         <Layout>
             <section className="text-gray-600 bg-white body-font overflow-hidden">
-                <div className="container px-5 py-10 mx-auto">
+                <div className="container px-5 py-5  w-full">
                    
                     <div className="lg:w-full  flex flex-wrap">
-                      <div className=" flex ">
-                  <section className="flex space-x-20">
-                <nav className="col-2">
-                    {
-                        photos.map(photo=>
-                            <div className="mb-2 p-1 border border-2 border-primary w-12 lg:w-16 "  key={photo}>
-                                <img src={photo}  onMouseOver={HandleMouseOver} className='w-10 h-10 lg:w-14 lg:h-14' />
-                            </div>
-                            )
-                    }
+                      <div className=" flex w-3/4 ">
+                  <section className=" w-full flex flex-col">
+                  <main className="relative flex justify-center items-center col-10">
+                  <img
+                      onContextMenu={(e) => e.preventDefault()}
+                      className="preview-image h-[300px] w-[300px] lg:w-[90%] lg:h-[90%] transition-transform hover:scale-105 hover:shadow-2xl"
+                      src={preview}
+                  />
+                  <button className="wishlist-button bg-white rounded-full absolute top-[7%] right-[7%] h-7 w-7 p-0 border-0 inline-flex items-center justify-center text-gray-500">
+                  <svg
+                                        fill="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        className="w-4 h-4"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                     </svg>                 
+                      </button>
+              </main>
+
+
+
+                <nav className="  col-2 flex  jystify-center items-center mx-auto space-x-5">
+                {imagesArray.map((photo, index) => (
+        <div  key={index}>
+          {photo && 
+                <div className=" mb-2 p-1 border border-2 border-gray-600 w-12 lg:w-16" >
+
+          <img src={photo} onMouseOver={HandleMouseOver} className="w-10 h-10 lg:w-14 lg:h-14" /> 
+          </div>}
+        </div>
+      ))}
                 </nav>
-                <main className="col-10">
-                    <img  className="preview-image h-[300px] w-[300px] lg:h-[400px] lg:w-[400px] transition-transform hover:scale-110 hover:shadow-2xl"  src={preview} />
-                </main>
-            </section>
+                 </section>
                         </div>
 
 
-                        <div>
+                        <div className='w-1/4 flex justify-start items-start left-0'>
                     {products && 
-                        <div className="lg:w-full w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                            <h2 className="company uppercase text-orange-400 font-bold text-sm sm:text-md tracking-wider pb-3 sm:pb-5">
-                                LuxCraft Decor
-                            </h2>
-                            <h1 className="product capitalize text-blue-900 font-bold text-3xl sm:text-2xl sm:leading-none pb-3">
+                        <div className="lg:w-full w-full  lg:py-6 mt-6 lg:mt-0">
+                           
+                            <h1 className="product capitalize text-blue-900 font-bold text-xl md:text-2xl sm:leading-none ">
                                 {products.title}
                             </h1>
+                            <h2 className="company capitalize text-gray-400  text-xs sm:text-xs tracking-wider ">
+                                LuxCraft Decor
+                               
+                            </h2>
 
 
-                            <div className="flex mb-4">
-                                <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
-                                  <Link to='https://www.facebook.com/profile.php?id=61554174676013' ><FaFacebookF/></Link>
-                                  <Link to='https://www.instagram.com/luxcraft.decor/'><FaInstagram/></Link>
-                                  <Link><BsTwitterX/> </Link>
-                                  <Link><FaPinterest/></Link>
-                                  <Link><FaShare /></Link>
 
-                                  
-                                </span>
-                            </div>
-                            <div className='flex flex-col mb-4 text-sm'>
+                            {/* <div className='flex flex-col mb-4 text-sm'>
                               <p>Artist: {products.artistname}</p>
                               <p>Type: {products.productType}</p>
                               <p>Orientation: {products.orientation}</p>
@@ -225,40 +293,47 @@ function ProductInfo() {
                               <p>Material: {products.material}</p>
                               <p className='text-sky-950 text-lg pb-2 lg:py-7 lg:leading-6 w-96'>Description: <br/><span className='text-sky-950 text-base pb-2 lg:py-7 lg:leading-6 w-96'>
                                 {products.description}</span></p>
-                            </div>
+                            </div> */}
                             <div className="flex justify-between items-center">
 
-                            <span className="title-font font-medium text-2xl text-blue-950">
+                            <span className="title-font font-bold text-2xl mt-3 text-blue-950">
                                 ${products.price}
-                                </span>     
-                            </div>
+                                </span> 
 
-                            <div className="flex pt-10">
-                            <div className="bg-gray-200 lg:px-6 lg:py-3 rounded-lg">
-                              <button className=" px-4 py-1 text-2xl text-black" onClick={() => handleCounterChange('decrease')}>
+                                 {/* <div className="bg-gray-200 lg:px-2 rounded-lg">
+                              <button className=" px-4  text-sm text-black" onClick={() => handleCounterChange('decrease')}>
                                     -
                                 </button>
-                                <span className="mx-2 text-2xl text-black">{count}</span>
-                                <button className="text-2xl text-black px-4 py-1" onClick={() => handleCounterChange('increase')}>
+                                <span className="mx-2 text-sm text-black">{count}</span>
+                                <button className="text-sm text-black px-4 " onClick={() => handleCounterChange('increase')}>
                                     +
                                 </button>
-                              </div>
-                            <button className="rounded-full  ml-auto w-16 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                                    <svg
-                                        fill="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        className="w-8 h-8"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-                                    </svg>
+                              </div>     */}
+                            </div>
+                            <div className='mt-5'>
+                              <h1 className='text-black'>Size:</h1>
+                                
+                            <div className='flex mt-2 space-x-4  text-[12px]'>
+                              <span className='border border-gray-400 px-2 py-2'> 400cmX500cm</span>
+                              <span className='border border-gray-400 px-2 py-2'> 400cmX500cm</span>
+                              <span className='border border-gray-400 px-2 py-2'> 400cmX500cm</span>
+                            </div>
+                           
+                          
+
+                            </div>
+  
+                            
+
+                            <div className="flex pt-14">
+                            <button  onClick={()=>addCart(products)} className="flex text-base text-white items-center justify-center text-center w-52  bg-orange-500 border-0  focus:outline-none hover:bg-orange-600 ">
+                                  <TiShoppingCart className=' h-10'/>  <span className='pl-2'>Add To Cart</span>
                                 </button>
+                          
 
                            
-                                <button  onClick={()=>addCart(products)} className="flex ml-2 text-base text-white items-center justify-center text-center w-52  bg-orange-500 border-0  focus:outline-none hover:bg-orange-600 rounded-xl">
-                                  <TiShoppingCart className='w-8 h-6'/>  <span className='pl-2'>Add To Cart</span>
+                                <button  className="flex ml-2 text-base text-white items-center justify-center text-center w-52 py-2  bg-orange-500 border-0  focus:outline-none hover:bg-orange-600">
+                                  <BsLightningChargeFill  className=' h-10'/>  <span className='pl-2'>Buy Now</span>
                                 </button>
                                
                             </div>
