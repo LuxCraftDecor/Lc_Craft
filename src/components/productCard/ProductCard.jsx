@@ -64,7 +64,7 @@ function ProductCard() {
  
 
     const isItemInCart = (productId) => {
-        return cartItems.some(item => item.id === productId);
+        // return cartItems.some(item => item.id === productId);
     };
 
     const handleproductClick = (productId) => {
@@ -149,9 +149,10 @@ const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_t
            {/* <img src={backgroundImage} alt='bgimage' style={{ width: '100%', height:'450px', objectFit: 'cover', position: 'absolute', zIndex: -1 }}/> */}
 
                 <div className="flex flex-wrap m-4 ">
-                    {product.filter((obj)=> obj.title.toLowerCase().includes(searchkey))
-                     .filter((obj) => obj.category.toLowerCase().includes(filterType))
-                     .filter((obj) => obj.price.includes(filterPrice)).slice(0,8).map((item, index) => {
+                    {product .filter((obj) => obj.title && obj.title.toLowerCase().includes(searchkey))
+                                .filter((obj) => obj.category && obj.category.toLowerCase().includes(filterType))
+                                .filter((obj) => obj.price && obj.price.includes(filterPrice))
+                                .slice(0, 8).map((item, index) => {
                         const { title, price, description, imageUrl,id } = item;
                         const isInCart = isItemInCart(id);
                         const isInWishlist = wishlistStatus[id] || false; // Check if the product is in the wishlist

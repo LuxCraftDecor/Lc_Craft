@@ -27,6 +27,7 @@ import ImageUpload from './components/Addimg';
 import Myprofile from './pages/Profile/Myprofile';
 import LimitedEdition from './components/productCard/LimitedEdition';
 import Payment from './payment';
+import Aboutus from './pages/Aboutus/aboutus';
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
           <Route path="/Luxcraftadmin" element={<Luxcraftlogin />}></Route>
 
           <Route path="/home"  element={<ProtectedLuxcraft element={<Home />}/>} />
-        
+          <Route path="/aboutus"  element={<ProtectedLuxcraft element={<Aboutus />}/>} />
+
           <Route path="/allproducts/:slink" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
           <Route path="/limited-edition" element={<ProtectedLuxcraft  element={<LimitedEdition />}/>} />
 

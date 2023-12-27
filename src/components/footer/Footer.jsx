@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import myContext from '../../context/data/myContext'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsTwitterX } from "react-icons/bs";
 import { FaSquareInstagram   } from "react-icons/fa6";
 import { FaFacebook,FaPinterest   } from "react-icons/fa";
@@ -9,6 +9,10 @@ import { FaFacebook,FaPinterest   } from "react-icons/fa";
 function Footer() {
   const context = useContext(myContext);
   const { mode } = context;
+  const navigate= useNavigate()
+  const handleaboutus =()=>{
+    navigate('/aboutus')
+  }
   return (
     <div>
 <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
@@ -53,8 +57,8 @@ function Footer() {
           <p className="font-medium">
             Company
           </p>
-          <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a className="hover:opacity-75" > About </a>
+          <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500 cursor-pointer">
+            <a className="hover:opacity-75" onClick={handleaboutus} > About </a>
             <a className="hover:opacity-75" > Meet the Team </a>
             <a className="hover:opacity-75" > History </a>
             <a className="hover:opacity-75" > Careers </a>
