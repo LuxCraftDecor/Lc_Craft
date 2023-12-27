@@ -12,7 +12,6 @@ function Allproducts() {
   const navigate = useNavigate();
   const location = useLocation();
   const { slink } = useParams();
-  console.log(slink);
 
   const context = useContext(myContext);
 
@@ -43,18 +42,19 @@ function filteredData(products, selected) {
     return products; // Return all products if no category is selected
   }
 
-  return products.filter(({ category, productType, orientation, color, price, title, description }) =>
+  return products.filter(({ category, productType, orientation, color, price, title, description }) => {
     // Modify the conditions based on your actual data structure
-    category === selected ||
-    color === selected ||
-    price === selected ||
-    title === selected ||
-    orientation === selected ||
-    productType === selected ||
-    description.toLowerCase().includes(selected.toLowerCase()) ||
-    productType.toLowerCase().includes(selected.toLowerCase()) ||
-    category.toLowerCase().includes(selected.toLowerCase())
-  );
+    return (
+        (category && category.toLowerCase().includes(selected.toLowerCase())) ||
+        (color && color.toLowerCase().includes(selected.toLowerCase())) ||
+        (price && price.toLowerCase().includes(selected.toLowerCase())) ||
+        (title && title.toLowerCase().includes(selected.toLowerCase())) ||
+        (orientation && orientation.toLowerCase().includes(selected.toLowerCase())) ||
+        (productType && productType.toLowerCase().includes(selected.toLowerCase())) ||
+        (description && description.toLowerCase().includes(selected.toLowerCase()))
+    );
+});
+
   
 }
 
