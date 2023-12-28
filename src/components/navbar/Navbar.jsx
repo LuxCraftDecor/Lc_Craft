@@ -74,43 +74,43 @@ function Navbar() {
                 </div>
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   
-                  <Link to={'/allproducts'} className="text-base font-medium text-black " style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  <Link to={'/allproducts'} className="text-base font-medium text-[#204694] " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     All Products
                   </Link>
 
                   {user ? <div className="flow-root">
-                    <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-black">
+                    <Link to={'/order'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-[#204694]">
                       Order
                     </Link>
                   </div> : ""}
                   {user ? <div className="flow-root">
-                    <Link to={'/myProfile/accountsettings'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-black">
+                    <Link to={'/myProfile/accountsettings'} style={{ color: mode === 'dark' ? 'white' : '', }} className="-m-2 block p-2 font-medium text-[#204694]">
                       Profile
                     </Link>
                   </div> : ""}
 
                   {user?.user?.email === "admin@gmail.com" ? <div className="flow-root">
-                    <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    <Link to={'/dashboard'} className="-m-2 block p-2 font-medium text-[#204694]" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       admin
                     </Link>
                   </div> : ""}
 
                 {user ? <div className="flow-root">
-                    <a onClick={logout} className="-m-2 block p-2 font-medium text-black cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    <a onClick={logout} className="-m-2 block p-2 font-medium text-[#204694] cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       Logout
                     </a>
                   </div> : <div className="flow-root">
-                    <Link to={'/signup'}  className="-m-2 block p-2 font-medium text-black cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                    <Link to={'/signup'}  className="-m-2 block p-2 font-medium text-[#204694] cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       Signup
                     </Link>
                   </div>}
                   <div className="flow-root">
-                    <Link to={'/'} className="-m-2 block p-2 text-2xl font-medium text-black cursor-pointer">
+                    <Link to={'/'} className="-m-2 block p-2 text-2xl font-medium text-[#204694] cursor-pointer">
                     <IoPerson />
                     </Link>
                   </div>
 
-                  <button className="block font-medium  text-sm text-black" onClick={toggleMode}  style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  <button className="block font-medium  text-sm text-[#204694]" onClick={toggleMode}  style={{ color: mode === 'dark' ? 'white' : '', }}>
                     {mode === 'light' ? (
                       <div className='flex gap-3'>
                         <p>Light</p> 
@@ -132,7 +132,7 @@ function Navbar() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <span className="ml-3 block text-base font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>INDIA</span>
+                    <span className="ml-3 block text-base font-medium text-[#204694]" style={{ color: mode === 'dark' ? 'white' : '', }}>INDIA</span>
                     <span className="sr-only">, change currency</span>
                   </a>
                 </div>
@@ -142,8 +142,8 @@ function Navbar() {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-decor-100 px-4  text-base font-medium text-black sm:px-6 lg:px-8" 
+      <header className="relative border  bg-white">
+        <p className="flex h-7 items-center  justify-center px-4  text-base font-medium text-[#204694] sm:px-6 lg:px-8" 
         style={{ backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '', color: mode === 'dark' ? 'white' : '', }}>
         !Introductory offer for first 100 customers avail 30% flat discount. USE CODE: xxxxxx
         </p>
@@ -165,8 +165,8 @@ function Navbar() {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <Link to={'/'} className='flex'>
-                  <div className="flex w-40">
+                <Link to={'/home'} className='flex'>
+                  <div className="flex w-48">
                     <img src={logo} alt="" />
                     {/* <h1 className=' text-2xl font-bold text-black  px-2 py-1 rounded' style={{ color: mode === 'dark' ? 'white' : '', }}>LuxCraft Decor</h1> */}
                   </div>
@@ -175,7 +175,7 @@ function Navbar() {
               
 
 
-                <div className="relative hidden lg:flex items-center ml-20 mr-20 w-[300px] ">
+                <div className="relative hidden lg:flex items-center ml-20 mr-20 w-[150px] " >
                        
                         <input
                             type="text"
@@ -184,7 +184,7 @@ function Navbar() {
                             onChange={(e) => setSearchkey(e.target.value)}
                             id="searchkey"
                             placeholder="Search "
-                            className="px-10 py-1 w-full border-2 border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500  outline-2 text-base"
+                            className="px-10 py-2 w-full  border border-gray-300 rounded  focus:w-[700px] focus:border-2 focus:border-blue-400 bg-gray-100  text-base"
                             style={{
                               backgroundColor: mode === 'dark' ? 'rgb(64 66 70)' : '',
                               color: mode === 'dark' ? 'white' : '',
@@ -210,9 +210,7 @@ function Navbar() {
 
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
 
-                  <Link to={'/allproducts'} className="text-base font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
-                    All Products
-                  </Link>
+              
                  {/* {user ?  
                  <Link to={'/order'} className="text-base font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Order
@@ -223,7 +221,7 @@ function Navbar() {
                     } */}
 
                   {user?.user?.email === 'admin@gmail.com' ? 
-                   <Link to={'/dashboard'} className="text-base font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                   <Link to={'/dashboard'} className="text-base font-medium text-[#204694]" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Admin
                   </Link> : ""}
                   
@@ -273,7 +271,7 @@ function Navbar() {
         <div className="flex items-center">
     
       <div className="hidden lg:ml-8 lg:flex">
-        <a href="#" className="flex items-center text-black text-base" onClick={toggleDropdown}>
+        <a href="#" className="flex items-center text-[#204694] text-base" onClick={toggleDropdown}>
         <IoPerson className='text-2xl' />
           {/* <img className="inline-block w-10 h-10 rounded-full" src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTY1LWtsaGN3ZWNtLmpwZw.jpg" alt="Dan_Abromov" /> */}
          <div>
@@ -308,10 +306,10 @@ function Navbar() {
 
         <div>
         {user ?  
-                 <Link to={'/order'} className="text-sm font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                 <Link to={'/order'} className="text-sm font-medium text-[#204694]" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     My Order
                   </Link> :   
-                  <Link to={'/signup'}  className="text-sm font-medium text-black" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  <Link to={'/signup'}  className="text-sm font-medium text-[#204694]" style={{ color: mode === 'dark' ? 'white' : '', }}>
                       Signup
                     </Link>
                     }
@@ -320,13 +318,13 @@ function Navbar() {
 
            <div>
            {user ?  
-            <a onClick={logout} className="text-sm font-medium text-black cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
+            <a onClick={logout} className="text-sm font-medium text-[#204694] cursor-pointer  " style={{ color: mode === 'dark' ? 'white' : '', }}>
                     Logout
             </a> : ""}
            </div>
 
 
-            <button className="block font-medium  text-sm text-black" onClick={toggleMode}  style={{ color: mode === 'dark' ? 'white' : '', }}>
+            <button className="block font-medium  text-sm text-[#204694]" onClick={toggleMode}  style={{ color: mode === 'dark' ? 'white' : '', }}>
                     {mode === 'light' ? (
                       <div className='flex gap-3'>
                         <p>Light</p> 
@@ -344,7 +342,7 @@ function Navbar() {
         )}
       </div>
       {/* {user ? (
-        <a onClick={logout} className="text-base font-medium text-blackcursor-pointer" style={{ color: mode === 'dark' ? 'white' : '' }}>
+        <a onClick={logout} className="text-base font-medium text-[#204694]cursor-pointer" style={{ color: mode === 'dark' ? 'white' : '' }}>
           Logout
         </a>
       ) : (
@@ -357,7 +355,7 @@ function Navbar() {
 
 
                 <div className="ml-4 flow-root lg:ml-6">
-                  <Link to={'/cart'} className="group -m-2 text-yellow-500 flex items-center p-2" style={{ color: mode === 'dark' ? 'white' : '', }}>
+                  <Link to={'/cart'} className="group -m-2 text-[#204694] flex items-center p-2" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     <TiShoppingCart className='w-10 h-8'/>
 
                     <span className="ml-2 text-base font-medium text-blue-500 group-" style={{ color: mode === 'dark' ? 'white' : '', }}>{cartProductsFromFirestore.length}</span>
@@ -368,8 +366,10 @@ function Navbar() {
             </div>
           </div>
         </nav>
+
+        <Menubar/>
       </header>
-      <Menubar/>
+      
     </div>
   )
 }

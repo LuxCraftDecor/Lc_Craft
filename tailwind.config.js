@@ -8,8 +8,8 @@ export default {
     extend: {
       colors:{
         'decor':{
-          100: '#C3E2C2',
-          200: '#EAECCC',
+          100: '#EB455F',
+          200: '#FAFAFA',
           300: '#DBCC95',
           400: '#CD8D7A'
         }

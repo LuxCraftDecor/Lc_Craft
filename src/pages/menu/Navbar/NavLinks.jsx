@@ -22,7 +22,7 @@ const NavLinks = () => {
         <div>
           <div className=" flex px-3 justify-between text-center  text-center md:cursor-pointer group">
           <h1
-            className="text-base text-white flex md:pr-0 pr-1 group"
+            className="text-base text-[#204694] flex md:pr-0 pr-1 group"
             onClick={() => {
               if (link.submenu) {
                 heading !== link.name ? setHeading(link.name) : setHeading("");
@@ -31,7 +31,7 @@ const NavLinks = () => {
             }} >
                       
                       <Link
-                  className="text-white text-sm capitalize"
+                  className="text-[#204694] text-sm capitalize"
                   to={
                     link.link === "full-collections"
                       ? `/allproducts/${link.link}`
@@ -68,7 +68,7 @@ const NavLinks = () => {
                           {mysublinks.Head}
                         </h1>
                         {mysublinks.sublink.map((slink) => (
-                          <li className="text-xs capitalize  text-left text-black my-2.5">
+                          <li className="text-xs capitalize  text-left text-[#204694] my-2.5">
                             <Link
                               to={`/allproducts/${slink.link}`}
                               className="hover:text-primary hover:text-pink-600 "

@@ -19,13 +19,13 @@ export default function Sortprotuctcard() {
 
   return (
     <div className="w-[100%] 	" >
-        <img src={image1} alt='bgimage' style={{ width:'100%', objectFit: 'cover', position: 'absolute', zIndex: -1, backgroundColor:'rgb(136, 171, 142,)' }}/>
+        {/* <img src={image1} alt='bgimage' style={{ width:'100%', objectFit: 'cover', position: 'absolute', zIndex: -1, backgroundColor:'rgb(136, 171, 142,)' }}/> */}
 
       
-      <div className=" w-full pl-20 pt-5">
+      <div className=" w-full pl-16 pt-5">
             <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-blue-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
             <div className="h-1 w-20 bg-pink-600 rounded"></div>
-                </div>
+       </div>
       <div className='flex justify-center items-center m-10 '>
       <div className="relative gap-4 flex bg-[#88AB8E] p-10 shadow-2xl shadow-stone-300">
 

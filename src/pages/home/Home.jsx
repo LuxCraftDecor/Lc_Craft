@@ -4,12 +4,14 @@ import ProductCard from '../../components/productCard/ProductCard'
 import Testimonial from '../../components/testimonial/Testimonial'
 import Sortprotuctcard from '../../components/productCard/sortprotuctcard'
 import HeroSection from '../../components/heroSection/HeroSection'
+import LimitedProduct from '../../components/productCard/LimitedProduct'
 
 
 function Home() {
   return (
     <Layout> 
       <HeroSection />
+      <LimitedProduct/>
       <Sortprotuctcard/>
       <ProductCard />     
       <Testimonial />
