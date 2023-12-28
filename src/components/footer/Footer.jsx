@@ -64,7 +64,7 @@ function Footer() {
             <a className="hover:opacity-75" > Careers </a>
           </nav>
         </div>
-        <div>
+        {/* <div>
           <p className="font-medium">
             Services
           </p>
@@ -75,7 +75,7 @@ function Footer() {
             <a className="hover:opacity-75" > HR Consulting </a>
             <a className="hover:opacity-75" > SEO Optimisation </a>
           </nav>
-        </div>
+        </div> */}
         <div>
           <p className="font-medium">
             Helpful Links

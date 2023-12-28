@@ -9,7 +9,8 @@ import LimitedProduct from '../../components/productCard/LimitedProduct'
 
 function Home() {
   return (
-    <Layout> 
+    <Layout>
+   
       <HeroSection />
       <LimitedProduct/>
       <Sortprotuctcard/>
