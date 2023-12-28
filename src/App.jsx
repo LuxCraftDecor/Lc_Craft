@@ -28,6 +28,7 @@ import Myprofile from './pages/Profile/Myprofile';
 import LimitedEdition from './components/productCard/LimitedEdition';
 import Payment from './payment';
 import Aboutus from './pages/Aboutus/aboutus';
+import Categories from './pages/Collections/Categories';
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
           <Route path="/aboutus"  element={<ProtectedLuxcraft element={<Aboutus />}/>} />
 
           <Route path="/allproducts/:slink" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
+          <Route path="/collection/:slink" element={<ProtectedLuxcraft  element={<Categories />}/>} />
+
           <Route path="/limited-edition" element={<ProtectedLuxcraft  element={<LimitedEdition />}/>} />
 
 

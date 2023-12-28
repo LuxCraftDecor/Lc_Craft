@@ -11,19 +11,21 @@ import { FaInstagram,  } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { BsLightningChargeFill } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
-import imageu from '../../assets/Buddhist Culture_product.png';
+// import imageu from '../../assets/Buddhist Culture_product.png';
 
 
 
 
 function ProductInfo() {
     const context = useContext(myContext);
-    const {product, loading, setLoading } = context;
+    const {mode,product, loading, setLoading } = context;
     const [relatedProducts, setRelatedProducts] = useState([]);
 
     const [products, setProducts] = useState('')
     const params = useParams()
     // console.log(products.title)
+
+
 
     const getProductData = async () => {
         setLoading(true)
@@ -44,7 +46,8 @@ function ProductInfo() {
           return (
               item.productType === products.productType &&
               item.category === products.category &&
-              item.id !== params.id // Exclude the current product
+              item.id !== params.id 
+              // Exclude the current product
           );
       });
 
@@ -203,7 +206,7 @@ function ProductInfo() {
     const image2 = products && products.subImages[1];
     const image3 = products && products.subImages[2];
     const image4 = products && products.subImages[3];
-    const image5 = [imageu]
+    const image5 = products && products.imageUrl;
     const photos = [image1, image2, image3, image4,image5].filter(url => url !== '');
     const imagesArray = [image1, image2, image3, image4, image5].filter(url => url !== '');
 
@@ -222,7 +225,9 @@ function ProductInfo() {
 
 
       
-  
+      const handleproductClick = (productId) => {
+        navigate(`/productinfo/${productId}`);
+    };
 
 
 
@@ -234,7 +239,7 @@ function ProductInfo() {
                     <div className="lg:w-full  flex flex-wrap">
                       <div className=" flex w-3/4 ">
                   <section className=" w-full flex flex-col">
-                  <main className="relative flex justify-center items-center col-10">
+                  <main className="relative flex justify-center lg:h-[500px]  items-center col-10">
                   <img
                       onContextMenu={(e) => e.preventDefault()}
                       className="preview-image h-[300px] w-[300px] lg:w-[90%] lg:h-[90%] transition-transform hover:scale-105 hover:shadow-2xl"
@@ -384,17 +389,29 @@ function ProductInfo() {
 
                 </div>
             </section>
-            <h3>Related Products</h3>
-            <ul>
+            <ul className='flex justify-center items-center px-20 py-5 flex-wrap'>
                 {relatedProducts.map((relatedProduct) => (
-                    <div key={relatedProduct.id}>
-                      <h1>{relatedProduct.title}</h1>
-                      <img src={relatedProduct.imageUrl}/>
+                    <div key={relatedProduct.id} className="p-1 md:w-1/5">
+                  <div  className="h-full bg-white hover:border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out rounded-xl   hover:border-gray-900 hover:border-opacity-60  overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
+
+
+                      <div onClick={() => handleproductClick(id)} className="flex justify-center cursor-pointer">
+                      <img className="rounded-2xl w-full h-60 p-2 hover:scale-105 transition-scale-110 duration-500 ease-in-out" src={relatedProduct.imageUrl} alt="blog" />
+                    </div>
+                    <div className="p-5 border-t-2">
+                    <h2 className="tracking-widest text-xs title-font font-medium text-pink-600 mb-1" style={{ color: mode === 'dark' ? 'white' : '', }}>LuxCraft Decor</h2>
+                    <h1 className=" line-clamp-1 title-font text-sm font-medium text-gray-900 " style={{ color: mode === 'dark' ? 'white' : '', }}>{relatedProduct.title}</h1>
+                    <p className=" line-clamp-1 title-font text-sm font-medium text-gray-900 " style={{ color: mode === 'dark' ? 'white' : '', }}>{relatedProduct.description}</p>
+                    <p className="leading-relaxed mb-3" style={{ color: mode === 'dark' ? 'white' : '' }}>${relatedProduct.price}</p>
+
+                    </div>
+                    </div>
+                      
                     </div>
                     
-                    // Display other related product details as needed
                 ))}
             </ul>
+            
         
 
         </Layout>

@@ -28,6 +28,7 @@ function myState(props) {
         price: null,
         imageUrl: null,
         category: null,
+        subcategory: null,
         width: null,
         height: null,
         customizable: null,
@@ -55,6 +56,7 @@ function myState(props) {
             products.price == null || 
             products.imageUrl == null || 
             products.category == null ||
+            products.subcategory == null ||
             products.artistname == null || 
             products.description == null ||
             products.width == null ||
