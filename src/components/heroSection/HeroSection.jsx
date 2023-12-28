@@ -5,7 +5,7 @@ import image1 from '../../assets/beautiful_painting_art_of_krishna_hd_krishna-19
 import image2 from '../../assets/image2.jpg'
 import image3 from '../../assets/image3.png'
 import image4 from '../../assets/image4.jpg'
-
+import { Watermark } from '@hirohe/react-watermark';
 function HeroSection() {
 
   let slides = [
@@ -53,6 +53,7 @@ function Carousel({ slides }) {
 
   return (
     <div className="overflow-hidden relative ">
+      <Watermark text="LuxCraft Decor" show={true} opacity="0.3" gutter="100" textColor="black"  multiline={false}>
       <div
         className={`flex transition ease-out duration-500`}
         style={{
@@ -62,8 +63,9 @@ function Carousel({ slides }) {
         {slides.map((s, index) => (
           <img key={index} src={s} className="" alt={`slide-${index}`} />
         ))}
+        
       </div>
-
+      </Watermark>
       <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl">
         <button onClick={previousSlide}>
           <BsFillArrowLeftCircleFill />
