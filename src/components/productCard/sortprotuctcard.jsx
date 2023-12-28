@@ -2,10 +2,12 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import myContext from '../../context/data/myContext';
 import image1 from '../../assets/bgimage.jpg'
+import { useNavigate } from 'react-router-dom';
 export default function Sortprotuctcard() {
 
   const context = useContext(myContext);
   const { mode, product } = context;
+  const navigate = useNavigate();
   const handmadePaintings = product.filter((item) => item.productType === 'Handmade Painting');
   const firstHandmadePainting = handmadePaintings.length > 0 ? handmadePaintings[0] : null;
   const secondHandmadePainting = handmadePaintings.length > 1 ? handmadePaintings[1] : null;
@@ -14,8 +16,8 @@ export default function Sortprotuctcard() {
   const fifthHandmadePainting = handmadePaintings.length > 4 ? handmadePaintings[4] : null;
   const sixthHandmadePainting = handmadePaintings.length > 5 ? handmadePaintings[5] : null;
 
-  const handlechangehandmade = () => {
-  };
+  const handlechangehandmade = (clickedHandmadePainting) => {
+    navigate(`/allproducts/${clickedHandmadePainting}`)  };
 
   return (
     <div className="w-[100%] 	" >
@@ -27,7 +29,7 @@ export default function Sortprotuctcard() {
             <div className="h-1 w-20 bg-pink-600 rounded"></div>
        </div>
       <div className='flex justify-center items-center m-10 '>
-      <div className="relative gap-4 flex bg-[#88AB8E] p-10 shadow-2xl shadow-stone-300">
+      <div className="relative gap-4 flex bg-[#88AB8E] p-10 shadow-2xl cursor-pointer shadow-stone-300">
 
        <div className='flex flex-col space-y-4 '>
         <div className='flex gap-4 '>
@@ -38,7 +40,7 @@ export default function Sortprotuctcard() {
             className='w-48 h-52'       
             alt={firstHandmadePainting.productType}
             src={firstHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
+            onClick={()=>handlechangehandmade(firstHandmadePainting.productType)}
           />
         )}
             </div>
@@ -49,7 +51,7 @@ export default function Sortprotuctcard() {
             className='w-48 h-52'         
                alt={secondHandmadePainting.productType}
             src={secondHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
+            onClick={()=>handlechangehandmade(secondHandmadePainting.productType)}
           />
         )}
         </div>
@@ -64,7 +66,7 @@ export default function Sortprotuctcard() {
             className="w-[25rem] h-80 "           
              alt={sixthHandmadePainting.productType}
             src={sixthHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
+            onClick={()=>handlechangehandmade(thirdHandmadePainting.productType)}
           />
         )}
        </div>
@@ -80,7 +82,7 @@ export default function Sortprotuctcard() {
              className="w-[25rem] h-80  "            
               alt={fifthHandmadePainting.productType}
              src={fifthHandmadePainting.imageUrl}
-             onClick={handlechangehandmade}
+             onClick={()=>handlechangehandmade(fourthHandmadePainting.productType)}
            />
          )}
         </div>
@@ -92,7 +94,7 @@ export default function Sortprotuctcard() {
             className='w-48 h-52'       
             alt={thirdHandmadePainting.productType}
             src={thirdHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
+            onClick={()=>handlechangehandmade(fifthHandmadePainting.productType)}
           />
         )}
             </div>
@@ -103,7 +105,7 @@ export default function Sortprotuctcard() {
             className='w-48 h-52'         
                alt={fourthHandmadePainting.productType}
             src={fourthHandmadePainting.imageUrl}
-            onClick={handlechangehandmade}
+            onClick={()=>handlechangehandmade(sixthHandmadePainting.productType)}
           />
         )}
         </div>

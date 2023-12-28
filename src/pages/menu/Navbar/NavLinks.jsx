@@ -11,7 +11,7 @@ const NavLinks = () => {
 
 
   const handleHeadClick =(mysublink)=>{
-    navigate(`/allproducts/${mysublink}`)
+    navigate(`/collection/${mysublink}`)
     console.log(mysublink);
   }
 
@@ -59,7 +59,7 @@ const NavLinks = () => {
 
             {link.submenu && (
               <div>
-                <div className="absolute left-0 w-full z-10 top-36 hidden group-hover:md:block hover:md:block ">
+                <div className="absolute left-0 w-full z-10 top-32 hidden group-hover:md:block hover:md:block ">
                   
                   <div className=" w-full bg-white rounded-2xl border-8 border-blue-900 p-5 grid grid-cols-3 gap-10">
                     {link.sublinks.map((mysublinks) => (

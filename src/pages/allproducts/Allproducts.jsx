@@ -42,7 +42,7 @@ function filteredData(products, selected) {
     return products; // Return all products if no category is selected
   }
 
-  return products.filter(({ category, productType, orientation, color, price, title, description }) => {
+  return products.filter(({ category, productType,subcategory, orientation, color, price, title, description }) => {
     // Modify the conditions based on your actual data structure
     return (
         (category && category.toLowerCase().includes(selected.toLowerCase())) ||
@@ -51,6 +51,7 @@ function filteredData(products, selected) {
         (title && title.toLowerCase().includes(selected.toLowerCase())) ||
         (orientation && orientation.toLowerCase().includes(selected.toLowerCase())) ||
         (productType && productType.toLowerCase().includes(selected.toLowerCase())) ||
+        (subcategory && subcategory.toLowerCase().includes(selected.toLowerCase())) ||
         (description && description.toLowerCase().includes(selected.toLowerCase()))
     );
 });
@@ -69,7 +70,7 @@ const handleproductClick = (productId) => {
     <>
       <Navbar />
       <Sidebar handleChange={handleChange} />
-      <Recommended handleClick={handleClick} />
+      {/* <Recommended handleClick={handleClick} /> */}
           <div className="flex flex-wrap ml-80 mt-8 z-[-2]">
       
           {filteredProducts.map((item, index) => {
