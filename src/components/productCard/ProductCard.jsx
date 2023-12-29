@@ -140,12 +140,13 @@ const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_t
 
 
     return (
-        <section className="bg-blue-300 text-gray-600 body-font">
+        <section className="bg-white text-gray-600 body-font">
             <div className="container px-5 py-8 md:py-16 mx-auto">
-                <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
-                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Our Latest Collection</h1>
-                    <div className="h-1 w-20 bg-pink-600 rounded"></div>
-                </div>
+            <div className="w-full flex justify-center items-center mb-6 lg:mb-10">
+  <div className="h-1 w-20 bg-black mr-5 rounded"></div>
+    <h1 className="sm:text-3xl text-2xl  font-medium title-font mb-2 uppercase text-black">Latest Collections</h1>
+    <div className="h-1 w-20 bg-black ml-5 rounded"></div>
+  </div>
                 <div style={{ position: 'relative' }}>
            {/* <img src={backgroundImage} alt='bgimage' style={{ width: '100%', height:'450px', objectFit: 'cover', position: 'absolute', zIndex: -1 }}/> */}
 
@@ -160,9 +161,9 @@ const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_t
 
                         return (
                             <div key={index} className="p-1 md:w-1/5  " >
-                                <div  className="h-full bg-white hover:border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out rounded-xl   hover:border-gray-900 hover:border-opacity-60  overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
+                                <div  className="h-full bg-white hover:border-2 border border-gray-150 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out rounded-xl    hover:border-opacity-60  overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
                                 <div onClick={() => handleproductClick(id)} className="flex justify-center cursor-pointer">
-                                    <img className="rounded-2xl w-full h-60 p-2 hover:scale-105 transition-scale-110 duration-500 ease-in-out" src={imageUrl} alt="blog" />
+                                    <img className=" w-full h-60 p-2 hover:scale-105 transition-scale-110 duration-500 ease-in-out" src={imageUrl} alt="blog" />
                                 </div>
                                     <div className="p-5 border-t-2">
                                         <h2 className="tracking-widest text-xs title-font font-medium text-pink-600 mb-1" style={{ color: mode === 'dark' ? 'white' : '', }}>LuxCraft Decor</h2>

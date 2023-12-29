@@ -59,7 +59,7 @@ else{
     };
 
     try {
-        const response = await fetch("https://68.183.92.94:7000/create-checkout-session", {
+        const response = await fetch("https://stripe.luxcraftdecor.com.au/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
