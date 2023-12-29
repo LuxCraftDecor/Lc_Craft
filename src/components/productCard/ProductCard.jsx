@@ -69,6 +69,7 @@ function ProductCard() {
 
     const handleproductClick = (productId) => {
         navigate(`/productinfo/${productId}`);
+        window.scrollTo(0, 0)
     };
 
     const [isInWishlist, setIsInWishlist] = useState(false);
@@ -139,7 +140,7 @@ const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_t
 
 
     return (
-        <section className="bg-white text-gray-600 body-font">
+        <section className="bg-blue-300 text-gray-600 body-font">
             <div className="container px-5 py-8 md:py-16 mx-auto">
                 <div className="lg:w-1/2 w-full mb-6 lg:mb-10">
                     <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>Our Latest Collection</h1>
@@ -152,7 +153,7 @@ const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_t
                     {product.filter((obj) => obj.title && obj.title.toLowerCase().includes(searchkey))
                                 .filter((obj) => obj.category && obj.category.toLowerCase().includes(filterType))
                                 .filter((obj) => obj.price && obj.price.includes(filterPrice))
-                                .slice(0, 8).map((item, index) => {
+                                .slice(0, 10).map((item, index) => {
                         const { title, price, description, imageUrl,id } = item;
                         const isInCart = isItemInCart(id);
                         const isInWishlist = wishlistStatus[id] || false; // Check if the product is in the wishlist
