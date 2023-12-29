@@ -11,7 +11,6 @@ function HeroSection() {
 
   let slides = [
     image1,
-    image2,
     image3,
     image4,
   ];
@@ -64,7 +63,7 @@ function Carousel({ slides }) {
         }}
       >
         {slides.map((s, index) => (
-          <img key={index} src={s} className="" alt={`slide-${index}`} />
+          <img key={index} src={s} className="w-[100%] md:w-[100%] h-[100%] md:h-[650px]" alt={`slide-${index}`} />
         ))}
         
       </div>
