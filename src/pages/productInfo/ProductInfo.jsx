@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { fireDB } from '../../fireabase/FirebaseConfig';
 import { FaFacebookF,FaPinterest,FaShare   } from "react-icons/fa";
 import { FaInstagram,  } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsLightningChargeFill } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
 // import imageu from '../../assets/Buddhist Culture_product.png';
@@ -20,7 +20,7 @@ function ProductInfo() {
     const context = useContext(myContext);
     const {mode,product, loading, setLoading } = context;
     const [relatedProducts, setRelatedProducts] = useState([]);
-
+ const navigate = useNavigate();
     const [products, setProducts] = useState('')
     const params = useParams()
     // console.log(products.title)
@@ -227,6 +227,7 @@ function ProductInfo() {
       
       const handleproductClick = (productId) => {
         navigate(`/productinfo/${productId}`);
+        console.log(productId);
     };
 
 
@@ -395,7 +396,7 @@ function ProductInfo() {
                   <div  className="h-full bg-white hover:border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out rounded-xl   hover:border-gray-900 hover:border-opacity-60  overflow-hidden" style={{ backgroundColor: mode === 'dark' ? 'rgb(46 49 55)' : '', color: mode === 'dark' ? 'white' : '', }} >
 
 
-                      <div onClick={() => handleproductClick(id)} className="flex justify-center cursor-pointer">
+                      <div onClick={() => handleproductClick(relatedProduct.id)} className="flex justify-center cursor-pointer">
                       <img className="rounded-2xl w-full h-60 p-2 hover:scale-105 transition-scale-110 duration-500 ease-in-out" src={relatedProduct.imageUrl} alt="blog" />
                     </div>
                     <div className="p-5 border-t-2">
