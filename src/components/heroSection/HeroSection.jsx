@@ -1,22 +1,17 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import {BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill} from "react-icons/bs";
-import image1 from '../../assets/beautiful_painting_art_of_krishna_hd_krishna-1920x1080.jpg'
-import image2 from '../../assets/image2.jpg'
-import image3 from '../../assets/image3.png'
-import image4 from '../../assets/image4.jpg'
+
 import Watermark from '@uiw/react-watermark';
 import watermarkimg from '../../assets/luxcraft logo_white.png'
 function HeroSection() {
 
   let slides = [
-    image1,
-    image2,
-    image3,
-    image4,
+    "https://rsdistribution.ca/wp-content/uploads/2017/10/Free-vintage-desktop-wallpaper-1920px-HD.jpg",
+    "https://wallpapercave.com/wp/wp3913837.png"
+
   ];
 
-  // const backgroundImage = "https://www.hdwallpapers.in/download/brick_wall_white_texture_background_vintage_hd_brick-1920x1080.jpg";
 
   return (
   <div style={{ position: 'relative' }}>
@@ -64,7 +59,7 @@ function Carousel({ slides }) {
         }}
       >
         {slides.map((s, index) => (
-          <img key={index} src={s} className="" alt={`slide-${index}`} />
+          <img key={index} src={s} className="w-[100%] md:w-[100%] h-[100%] " alt={`slide-${index}`} />
         ))}
         
       </div>

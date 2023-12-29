@@ -1,124 +1,49 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import myContext from '../../context/data/myContext';
-import image1 from '../../assets/bgimage.jpg'
 import { useNavigate } from 'react-router-dom';
-export default function Sortprotuctcard() {
 
+export default function Sortprotuctcard() {
   const context = useContext(myContext);
   const { mode, product } = context;
   const navigate = useNavigate();
-  const handmadePaintings = product.filter((item) => item.productType === 'Handmade Painting');
-  const firstHandmadePainting = handmadePaintings.length > 0 ? handmadePaintings[0] : null;
-  const secondHandmadePainting = handmadePaintings.length > 1 ? handmadePaintings[1] : null;
-  const thirdHandmadePainting = handmadePaintings.length > 2 ? handmadePaintings[2] : null;
-  const fourthHandmadePainting = handmadePaintings.length > 3 ? handmadePaintings[3] : null;
-  const fifthHandmadePainting = handmadePaintings.length > 4 ? handmadePaintings[4] : null;
-  const sixthHandmadePainting = handmadePaintings.length > 5 ? handmadePaintings[5] : null;
+
+  const HandmadePaintings = product
+    .filter((item) => item.productType === 'Handmade Painting')
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 8);
 
   const handlechangehandmade = (clickedHandmadePainting) => {
-    navigate(`/allproducts/${clickedHandmadePainting}`)  };
+    navigate(`/allproducts/${clickedHandmadePainting}`);
+  };
 
   return (
-    <div className="w-[100%]  bg-sky-800	pb-5" >
-        {/* <img src={image1} alt='bgimage' style={{ width:'100%', objectFit: 'cover', position: 'absolute', zIndex: -1, backgroundColor:'rgb(136, 171, 142,)' }}/> */}
-
-      
-      <div className=" w-full pl-16 pt-5">
-            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-yellow-300" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
-            <div className="h-1 w-20 bg-pink-600 rounded"></div>
-       </div>
-      <div className='flex justify-center items-center m-10 '>
-      <div className="relative gap-4 flex p-10 shadow-2xl cursor-pointer shadow-stone-300">
-
-       <div className='flex flex-col space-y-4 '>
-        <div className='flex gap-4 '>
-            <div >
-            {firstHandmadePainting && (
-          <img
-            key={firstHandmadePainting.id}
-            className='w-48 h-52'       
-            alt={firstHandmadePainting.productType}
-            src={firstHandmadePainting.imageUrl}
-            onClick={()=>handlechangehandmade(firstHandmadePainting.productType)}
-          />
-        )}
+    <div className="w-full bg-white pb-5">
+       <div className="w-full flex justify-center items-center mb-6 lg:mb-10">
+  <div className="h-1 w-20 bg-black mr-5 rounded"></div>
+    <h1 className="sm:text-3xl text-2xl  font-medium title-font mb-2 uppercase text-black">Handmade paintings</h1>
+    <div className="h-1 w-20 bg-black ml-5 rounded"></div>
+  </div>
+      <div className="flex justify-center items-center m-4 md:m-6 lg:m-10">
+        <div className="flex flex-wrap">
+          {HandmadePaintings.map((handmadePaintings, index) => (
+            <div key={handmadePaintings.id} className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-2 py-5">
+              <div className="border border-[#e8e4e4] rounded overflow-hidden p-5">
+                <img
+                  className="w-full h-auto object-cover cursor-pointer"
+                  alt={handmadePaintings.productType}
+                  src={handmadePaintings.imageUrl}
+                  onClick={() => handlechangehandmade(handmadePaintings.productType)}
+                />
+                <div className=" flex flex-col justify-center items-center space-y-5 ">
+                  <h1 className='text-base font-thin	 text-[#373c41]'>{handmadePaintings.title}</h1>
+                  <p className="text-base font-thin	 text-[#373c41]">${handmadePaintings.price}</p>
+                </div>
+              </div>
             </div>
-            <div >
-         {secondHandmadePainting && (
-          <img
-            key={secondHandmadePainting.id}
-            className='w-48 h-52'         
-               alt={secondHandmadePainting.productType}
-            src={secondHandmadePainting.imageUrl}
-            onClick={()=>handlechangehandmade(secondHandmadePainting.productType)}
-          />
-        )}
+          ))}
         </div>
-       
-       
-        </div>
-       <div className=''>  
-        
-       {sixthHandmadePainting && (
-          <img
-            key={sixthHandmadePainting.id}
-            className="w-[25rem] h-80 "           
-             alt={sixthHandmadePainting.productType}
-            src={sixthHandmadePainting.imageUrl}
-            onClick={()=>handlechangehandmade(thirdHandmadePainting.productType)}
-          />
-        )}
-       </div>
-
-       </div>
-
-       <div className='flex flex-col space-y-4'>
-       <div className='w-full'>  
-        
-        {fifthHandmadePainting && (
-           <img
-             key={fifthHandmadePainting.id}
-             className="w-[25rem] h-80  "            
-              alt={fifthHandmadePainting.productType}
-             src={fifthHandmadePainting.imageUrl}
-             onClick={()=>handlechangehandmade(fourthHandmadePainting.productType)}
-           />
-         )}
-        </div>
-        <div className='flex space-x-5 '>
-            <div >
-            {thirdHandmadePainting && (
-          <img
-            key={thirdHandmadePainting.id}
-            className='w-48 h-52'       
-            alt={thirdHandmadePainting.productType}
-            src={thirdHandmadePainting.imageUrl}
-            onClick={()=>handlechangehandmade(fifthHandmadePainting.productType)}
-          />
-        )}
-            </div>
-            <div >
-         {fourthHandmadePainting && (
-          <img
-            key={fourthHandmadePainting.id}
-            className='w-48 h-52'         
-               alt={fourthHandmadePainting.productType}
-            src={fourthHandmadePainting.imageUrl}
-            onClick={()=>handlechangehandmade(sixthHandmadePainting.productType)}
-          />
-        )}
-        </div>
-       
-       
-        </div>
-       
-
-       </div>
-      
       </div>
-      </div>
-      
     </div>
   );
 }
