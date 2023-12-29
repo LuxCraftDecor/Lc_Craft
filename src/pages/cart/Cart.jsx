@@ -59,7 +59,7 @@ else{
     };
 
     try {
-        const response = await fetch("http://localhost:7000/create-checkout-session", {
+        const response = await fetch("http://68.183.92.94:7000/create-checkout-session", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)

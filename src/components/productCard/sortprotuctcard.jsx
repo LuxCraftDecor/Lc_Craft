@@ -20,16 +20,16 @@ export default function Sortprotuctcard() {
     navigate(`/allproducts/${clickedHandmadePainting}`)  };
 
   return (
-    <div className="w-[100%] 	" >
+    <div className="w-[100%]  bg-sky-800	pb-5" >
         {/* <img src={image1} alt='bgimage' style={{ width:'100%', objectFit: 'cover', position: 'absolute', zIndex: -1, backgroundColor:'rgb(136, 171, 142,)' }}/> */}
 
       
       <div className=" w-full pl-16 pt-5">
-            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-blue-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
+            <h1 className="sm:text-3xl text-2xl capitalize font-medium title-font mb-2 text-yellow-300" style={{ color: mode === 'dark' ? 'white' : '' }}>Shop Handmade Paintings</h1>
             <div className="h-1 w-20 bg-pink-600 rounded"></div>
        </div>
       <div className='flex justify-center items-center m-10 '>
-      <div className="relative gap-4 flex bg-[#88AB8E] p-10 shadow-2xl cursor-pointer shadow-stone-300">
+      <div className="relative gap-4 flex p-10 shadow-2xl cursor-pointer shadow-stone-300">
 
        <div className='flex flex-col space-y-4 '>
         <div className='flex gap-4 '>
