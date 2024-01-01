@@ -13,9 +13,9 @@ function Home() {
    
       <HeroSection />
       <LimitedProduct/>
-      <Sortprotuctcard/>
+      {/* <Sortprotuctcard/>
       <ProductTheme/>
-      <ProductCard />     
+      <ProductCard />      */}
       <Testimonial />
     </Layout>
   )

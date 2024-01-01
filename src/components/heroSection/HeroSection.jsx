@@ -1,15 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import {BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill} from "react-icons/bs";
-
+import image1 from '../../assets/Buddhist Art_Banner1.webp'
 import Watermark from '@uiw/react-watermark';
 import watermarkimg from '../../assets/luxcraft logo_white.png'
 function HeroSection() {
 
   let slides = [
-    "https://rsdistribution.ca/wp-content/uploads/2017/10/Free-vintage-desktop-wallpaper-1920px-HD.jpg",
-    "https://wallpapercave.com/wp/wp3913837.png"
-
+   image1
   ];
 
 
@@ -47,7 +45,7 @@ function Carousel({ slides }) {
     return () => clearInterval(intervalId);
   }, [current]);
 
-  return (
+  return (<>
     <div className="overflow-hidden relative ">
       <Watermark 
       image={watermarkimg} height={20} 
@@ -87,7 +85,8 @@ function Carousel({ slides }) {
             ></div>
           );
         })}
-      </div>
+      </div>     
     </div>
+    </>
   );
 }

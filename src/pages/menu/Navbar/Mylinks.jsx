@@ -53,7 +53,6 @@ export const links = [
           { name: "Milimal Art", link: "milimal-art" },
           { name: "Pop Art", link: "pop-art" },
           { name: "Urban Art", link: "urban-art" },
-          { name: "See More >", link: "Abstract-Paintings-More" },
         ],
       },
       {
@@ -65,7 +64,6 @@ export const links = [
           { name: "Landscape", link: "landscape" },
           { name: "Australian Cities", link: "australian-Cities" },
           { name: "Australian Culture & Heritage", link: "australian-culture-heritage" },
-          { name: "See More >", link: "Indian-Paintings-More" },
         ],
       },
       {
@@ -75,7 +73,6 @@ export const links = [
           { name: "Asian Art", link: "asian-art" },
           { name: "Historical European Masters", link: "historical-european-masters" },
           { name: "Latin American", link: "latin-american" },
-          { name: "See More >", link: "Global-Art-Movements-PAINTINGS" },
         ],
       },
       // {
@@ -98,19 +95,14 @@ export const links = [
           { name: "Classic Realism", link: "classic-realism" },
           { name: "Impressionism", link: "impressionism" },
           { name: "Renaissance Inspired", link: "renaissance-Inspired" },
-          { name: "See More >", link: "traditional-more" },
         ],
       },
       {
-        Head: "OTHER PAINTINGS",link:"other-paintings",
+        Head: "Custom Art Services",link:"custom-art-services",
         sublink: [
-          { name: "Motivational, Inspirational", link: "Motivational-Inspirational" },
-          { name: "Contemporary & Modern", link: "Contemporary-Modern" },
-          { name: "Still Life", link: "Still-Life" },
-          { name: "Realistic", link: "Realistic" },
-          { name: "Surrealism & Deep Art", link: "Surrealism-Deep-Art" },
-          { name: "Unique, Unusual", link: "Unique-Unusual" },
-          { name: "See More >", link: "Other-Paintings-More" },
+          { name: "Art Consulting", link: "art-consulting" },
+          { name: "Commissioned Artwork", link: "commissioned-artwork" },
+          
         ],
       },
     ],

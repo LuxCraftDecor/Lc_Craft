@@ -152,6 +152,7 @@ function Navbar() {
         !Introductory offer for first 100 customers avail 30% flat discount. USE CODE: xxxxxx
         </p>
 
+
         <nav aria-label="Top" className="bg-decor-200 px-4 border border-gray-200 sm:px-6 lg:px-8 shadow-xl " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
           <div className="">
             <div className="flex h-16 items-center">
@@ -372,6 +373,7 @@ function Navbar() {
         </nav>
 
         <Menubar/>
+  
       </header>
       
     </div>

@@ -8,6 +8,8 @@ const ModernAndContemporary = lazy(() => import('./ModernCategory'));
 const AustralianArt = lazy(() => import('./AustralianCategory'));
 const GlobalArtMovements = lazy(() => import('./GlobalaCategories'));
 const Traditional = lazy(() => import('./Traditionalcategories'));
+const CustomArtServices = lazy(() => import('./CustomArtServices'));
+
 
 const Categories = () => {
   const context = useContext(myContext);
@@ -23,6 +25,8 @@ const Categories = () => {
         return GlobalArtMovements;
       case 'traditional-paintings':
         return Traditional;
+        case 'custom-art-services':
+        return CustomArtServices;
       default:
         return null;
     }
