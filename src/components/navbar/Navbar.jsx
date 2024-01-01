@@ -33,6 +33,10 @@ function Navbar() {
     localStorage.clear('user');
     navigate('/login')
   }
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // Get the length of the cart items array
+  const cartItemCount = cartItems.length;
 
   // sticky top-0 z-50
   return (
@@ -358,7 +362,7 @@ function Navbar() {
                   <Link to={'/cart'} className="group -m-2 text-[#204694] flex items-center p-2" style={{ color: mode === 'dark' ? 'white' : '', }}>
                     <TiShoppingCart className='w-10 h-8'/>
 
-                    <span className="ml-2 text-base font-medium text-blue-500 group-" style={{ color: mode === 'dark' ? 'white' : '', }}>{cartProductsFromFirestore.length}</span>
+                    <span className="ml-2 text-base font-medium text-blue-500 group-" style={{ color: mode === 'dark' ? 'white' : '', }}>{cartItemCount}</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>
                 </div>

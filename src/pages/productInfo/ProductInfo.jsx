@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doc, getDoc,setDoc, addDoc, collection,serverTimestamp,updateDoc ,increment} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { fireDB } from '../../fireabase/FirebaseConfig';
-import { FaFacebookF,FaPinterest,FaShare   } from "react-icons/fa";
-import { FaInstagram,  } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { BsLightningChargeFill } from "react-icons/bs";
 import { TiShoppingCart } from "react-icons/ti";
+import { addToCart } from '../../redux/cartSlice';
 // import imageu from '../../assets/Buddhist Culture_product.png';
 
 
@@ -146,57 +145,63 @@ function ProductInfo() {
       };
 
 
-
-
-      const addCart = async (product, quantity = 1) => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-    
-        // Check if the user is logged in and user details are present
-        if (storedUser && storedUser.user && storedUser.user.uid) {
-            const userUid = storedUser.user.uid;
-    
-            // Get the reference to the user's cart in Firestore
-            const userCartRef = doc(fireDB, "carts", userUid);
-    
-            // Get the existing cart data
-            const userCartDoc = await getDoc(userCartRef);
-            const existingCart = userCartDoc.exists() ? userCartDoc.data().cartItems : [];
-    
-            // Check if the product is already in the cart
-            const existingProductIndex = existingCart.findIndex(item => item.id === product.id);
-    
+      const dispatch = useDispatch();
+      const handleAddToCart = async (product) => {
+        // Dispatch the addToCart action with the product data
+        dispatch(addToCart({product}));
+      
+        // Update Firebase database with the added product
+        try {
+          // Check if the user is logged in
+          const storedUser = JSON.parse(localStorage.getItem('user'));
+          const userUid = storedUser?.user?.uid;
+          if (!userUid) {
+            console.error('User not logged in. Unable to update the cart.');
+            toast.error('Please log in to add the product to the cart.');
+            return;
+          }
+      
+          const cartCollectionRef = collection(fireDB, 'carts');
+          const cartDocRef = doc(cartCollectionRef, userUid);
+      
+          const cartDocSnapshot = await getDoc(cartDocRef);
+      
+          if (cartDocSnapshot.exists()) {
+            // If the cart document exists, check if the product is already in the cart
+            const existingProducts = cartDocSnapshot.data().products;
+            const existingProductIndex = existingProducts.findIndex(
+              (p) => p.productId === product.productId
+            );
+      
             if (existingProductIndex !== -1) {
-                // If the product is already in the cart, update the quantity
-                existingCart[existingProductIndex].quantity += quantity;
+              // If the product is already in the cart, increment its quantity
+              existingProducts[existingProductIndex].quantity += 1;
             } else {
-                // If the product is not in the cart, add it with the specified quantity
-                existingCart.push({ ...product, quantity });
+              // If the product is not in the cart, add it
+              existingProducts.push({ ...product, quantity: 1 });
             }
-    
-            // Update the cart in Firestore
-            await setDoc(userCartRef, { cartItems: existingCart });
-    
-            // Notify the user
-            toast.success('Added to cart and updated in Firebase database');
-        } else {
-            const localCart = JSON.parse(localStorage.getItem('localCart')) || [];
-            const existingProductIndex = localCart.findIndex(item => item.id === product.id);
-    
-            if (existingProductIndex !== -1) {
-                // If the product is already in the local cart, update the quantity
-                localCart[existingProductIndex].quantity += quantity;
-            } else {
-                // If the product is not in the local cart, add it with the specified quantity
-                localCart.push({ ...product, quantity });
-            }
-    
-            // Store the cart in local storage
-            localStorage.setItem('localCart', JSON.stringify(localCart));
-    
-            // Notify the user
-            toast.success('Added to local cart');
+      
+            // Update the cart document
+            await setDoc(cartDocRef, { products: existingProducts });
+          } else {
+            // If the cart document doesn't exist, create a new one
+            await setDoc(cartDocRef, {
+              products: [{ ...product, quantity: 1 }],
+            });
+          }
+      
+          // You can also show a toast or notification to indicate that the product has been added to the cart
+          toast.success('Product added to the cart');
+        } catch (error) {
+          console.error('Error updating Firebase database:', error);
+          toast.error('Failed to update the cart. Please try again.');
         }
-    };
+      };
+      
+      
+      
+
+  
     
 
 
@@ -332,9 +337,9 @@ function ProductInfo() {
                             
 
                             <div className="flex pt-14">
-                            <button  onClick={()=>addCart(products)} className="flex text-base text-white items-center justify-center text-center w-52  bg-orange-500 border-0  focus:outline-none hover:bg-orange-600 ">
-                                  <TiShoppingCart className=' h-10'/>  <span className='pl-2'>Add To Cart</span>
-                                </button>
+                            <button onClick={()=>handleAddToCart(products)} className="flex text-base text-white items-center justify-center text-center w-52  bg-orange-500 border-0  focus:outline-none hover:bg-orange-600 ">
+            <TiShoppingCart className=' h-10'/>  <span className='pl-2'>Add To Cart</span>
+        </button>
                           
 
                            
