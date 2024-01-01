@@ -1,5 +1,5 @@
 import React from 'react'
-import IndigenousFqa, { ColonialFqa, LandscapeFqA } from '../../components/FQA/fqa'
+import IndigenousFqa, { ColonialFqa, Contemporaryfqa, LandscapeFqA } from '../../components/FQA/Australianfqa'
 
 export default function AustralianCategory() {
   return (
@@ -28,7 +28,7 @@ export default function AustralianCategory() {
 
 
 
-    <div class="flex flex-col px-6 py-5 sm:px-20 lg:flex-row">
+  <div class="flex flex-col px-6 py-5 sm:px-20 lg:flex-row">
   <div class="w-full lg:w-1/2 p-4">
     <p class="text-5xl mb-4 text-[#454545] ">Indigenous Art:</p>
     <p class="text-lg text-[#676767] ">The Soul of the Continent Dive into the profound and spiritual realm of Indigenous Art, where every brushstroke tells a story steeped in ancient traditions and lore. This art form, originating tens of thousands of years ago, is a window into the world's oldest continuous culture. Through dot paintings, bark art, and ceremonial sculptures, Indigenous artists narrate the Dreamtime stories and connect the past with the present.</p>
@@ -71,7 +71,7 @@ export default function AustralianCategory() {
   <div class="w-full lg:w-1/2 p-4">
     <p class="text-5xl mb-4 text-[#454545] ">Contemporary Australian Artists:</p>
     <p class="text-lg text-[#676767] ">A Modern Vision Step into the world of Contemporary Australian Artists, where modern techniques merge with unique Australian themes. This sub-category showcases artists who push boundaries, challenge norms, and create art that resonates with today's diverse, multicultural Australia. From abstract interpretations to avant-garde sculptures, contemporary art in Australia is a dynamic and evolving canvas.</p>
- <ColonialFqa/>
+ <Contemporaryfqa/>
   </div>
  
 </div>
