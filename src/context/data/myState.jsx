@@ -233,9 +233,8 @@ function myState(props) {
           const fetchCartProducts = async () => {
             try {
               const userCartDoc = await getDoc(userCartRef);
-      
               if (userCartDoc.exists()) {
-                const cartItemsFromFirestore = userCartDoc.data().cartItems;
+                const cartItemsFromFirestore = userCartDoc.data().products; // Adjust this line
                 setCartProductsFromFirestore(cartItemsFromFirestore || []);
               } else {
                 setCartProductsFromFirestore([]);
@@ -292,17 +291,22 @@ function myState(props) {
       const userCartDoc = await getDoc(userCartRef);
   
       if (userCartDoc.exists()) {
-        const updatedCartItems = userCartDoc.data().cartItems.map(item => {
-          if (item.id === itemId) {
-            // Update the quantity based on the action (increase/decrease)
-            item.quantity = action === 'increase' ? item.quantity + 1 : Math.max(item.quantity - 1, 1);
-          }
-          return item;
-        });
+        const cartData = userCartDoc.data();
+        if (cartData && Array.isArray(cartData.products)) {
+          const updatedCartItems = cartData.products.map(item => {
+            if (item.id === itemId) {
+              // Update the quantity based on the action (increase/decrease)
+              item.quantity = action === 'increase' ? item.quantity + 1 : Math.max(item.quantity - 1, 1);
+            }
+            return item;
+          });
   
-        await setDoc(userCartRef, { cartItems: updatedCartItems });
-        toast.success(`Quantity updated successfully for item: ${itemId}`);
-        setCartProductsFromFirestore(updatedCartItems);
+          await setDoc(userCartRef, { products: updatedCartItems }); // Update the property name here
+          toast.success(`Quantity updated successfully for item: ${itemId}`);
+          setCartProductsFromFirestore(updatedCartItems);
+        } else {
+          console.error('Invalid cart data structure:', cartData);
+        }
       }
   
       setLoading(false);
@@ -311,6 +315,8 @@ function myState(props) {
       setLoading(false);
     }
   };
+  
+  
   
 
 
