@@ -7,15 +7,9 @@ export default function LimitedProduct() {
     const context = useContext(myContext);
     const { mode, product } = context;
     const navigate = useNavigate();
-    const firstHandmadePainting = "https://cdn.pixabay.com/photo/2019/12/15/08/14/body-painting-4696539_1280.jpg";
-    const secondHandmadePainting = "https://cdn.pixabay.com/photo/2017/11/20/02/00/fantasy-2964231_1280.jpg";
-    const thirdHandmadePainting ="https://indianartzone.com/pub/media/catalog/product/a/f/affection_1.jpg"
-    const fourthHandmadePainting = "https://cdn.pixabay.com/photo/2017/06/24/02/56/art-2436545_1280.jpg"
-    const fifthHandmadePainting = "https://cdn.pixabay.com/photo/2017/07/15/15/50/fantasy-2506830_1280.jpg"
-    const sixthHandmadePainting = "https://cdn.pixabay.com/photo/2015/07/15/09/00/man-845847_1280.jpg"
-  
+   
     const handlechangehandmade = (clickedHandmadePainting) => {
-      navigate(`/allproducts/${clickedHandmadePainting}`)  };
+      navigate('/allproducts')  };
   return (
     <div  >
     <FetureProduct/>
@@ -66,7 +60,7 @@ export default function LimitedProduct() {
     </div>
   </div>
   <div className='flex justify-center items-center'>
-  <button className="text-center text-base md:text-lg  bg-blue-700 text-white px-4 md:px-5 py-2 rounded">Shop Now</button> {/* Added responsive padding and font size */}
+  <button onClick={handlechangehandmade} className="text-center text-base md:text-lg  bg-blue-700 text-white px-4 md:px-5 py-2 rounded">Shop Now</button> {/* Added responsive padding and font size */}
   </div>
 
 </div>

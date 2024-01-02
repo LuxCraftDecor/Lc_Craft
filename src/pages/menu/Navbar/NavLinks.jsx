@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import { links } from "./Mylinks";
 import { FaChevronUp ,FaChevronDown } from "react-icons/fa";
-
+import { FaBars } from "react-icons/fa";
 const NavLinks = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   const navigate = useNavigate();
@@ -31,12 +33,14 @@ const NavLinks = () => {
             }} >
                       
                       <Link
-                  className="text-[#204694] text-sm capitalize"
+                  className="text-[#204694] text-base capitalize"
                   to={
                     link.link === "full-collections"
                       ? `/allproducts/${link.link}`
                       : link.link === "limited-edition"
                       ? '/limited-edition'
+                      : link.link === "/aboutus"
+                      ? '/aboutus'
                       : "/home"
                   }
                 >
@@ -59,21 +63,17 @@ const NavLinks = () => {
 
             {link.submenu && (
               <div>
-                <div className="absolute left-0 w-full z-10 top-32 hidden group-hover:md:block hover:md:block ">
-                  
-                  <div className=" w-full bg-white rounded-2xl border-8 border-blue-900 p-5 grid grid-cols-3 gap-10">
-                    {link.sublinks.map((mysublinks) => (
-                      <div>
-                        <h1 className="text-sm capitalize text-left text-blue-400 hover:text-fuchsia-600  font-semibold" onClick={()=>handleHeadClick(mysublinks.link)} >
+                <div className="absolute left-0 w-full  z-10 top-32 hidden group-hover:md:block hover:md:block ">
+                  <div className="bg-black w-full bg-opacity-75 border-2 border-white px-16 py-10 grid grid-cols-5 ">
+                    {link.sublinks.map((mysublinks, index) => (
+                      <div key={index} className={index !== 0 ? "pl-5 border-l border-white" : ""}>
+                        <h1 className="text-sm capitalize text-left pb-5 text-white font-semibold" onClick={() => handleHeadClick(mysublinks.link)}>
                           {mysublinks.Head}
                         </h1>
-                        {mysublinks.sublink.map((slink) => (
-                          <li className="text-xs capitalize  text-left text-[#204694] my-2.5">
-                            <Link
-                              to={`/allproducts/${slink.link}`}
-                              className="hover:text-primary hover:text-pink-600 "
-                            >
-                              <span >{slink.name} </span>
+                        {mysublinks.sublink.map((slink, subIndex) => (
+                          <li key={subIndex} className="text-xs capitalize text-left text-white ">
+                            <Link to={`/allproducts/${slink.link}`} className="text-white">
+                              <span>{slink.name}</span>
                             </Link>
                           </li>
                         ))}
@@ -81,50 +81,59 @@ const NavLinks = () => {
                     ))}
                   </div>
                 </div>
+
               </div>
             )}
           </div>
           {/* Mobile menus */}
-          {/* <div
-            className={`
-            ${heading === link.name ? "md:hidden" : "hidden"}
-          `}
-          >
-            {link.sublinks.map((slinks) => (
-              <div>
-                <div>
+          <div className="md:hidden">
+        <FaBars onClick={() => setMenuOpen(!menuOpen)} />
+      </div>
+
+      {links.map((link, index) => (
+        <div key={index}>
+          {/* Existing code... */}
+
+          {link.submenu && (
+            <div className={`md:hidden ${menuOpen ? "block" : "hidden"}`}>
+              {/* Mobile Submenus */}
+              {link.sublinks.map((mysublinks, index) => (
+                <div key={index}>
                   <h1
                     onClick={() =>
-                      subHeading !== slinks.Head
-                        ? setSubHeading(slinks.Head)
-                        : setSubHeading("")
+                      setSubHeading(
+                        subHeading !== mysublinks.Head ? mysublinks.Head : ""
+                      )
                     }
-                    className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center md:pr-0 pr-5">
-                    {slinks.Head}
-
-                    <span className="text-xl md:mt-1 md:ml-2 inline">
+                    className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center"
+                  >
+                    {mysublinks.Head}
+                    <span className="text-xl inline">
                       <ion-icon
-                        name={`${subHeading === slinks.Head
-                          ? "chevron-up"
-                          : "chevron-down"
-                          }`}
+                        name={`${
+                          subHeading === mysublinks.Head
+                            ? "chevron-up"
+                            : "chevron-down"
+                        }`}
                       ></ion-icon>
                     </span>
                   </h1>
                   <div
-                    className={`${subHeading === slinks.Head ? "md:hidden" : "hidden"
+                    className={`${subHeading === mysublinks.Head ? "block" : "hidden"
                       }`}
                   >
-                    {slinks.sublink.map((slink) => (
-                      <li className="py-3 pl-14">
+                    {mysublinks.sublink.map((slink, subIndex) => (
+                      <li key={subIndex} className="py-3 pl-14">
                         <Link to={slink.link}>{slink.name}</Link>
                       </li>
                     ))}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div> */}
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
         </div>
       ))}
     </>

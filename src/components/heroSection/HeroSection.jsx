@@ -1,32 +1,27 @@
 import React from 'react';
-import { useState, useEffect } from "react";
-import {BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill} from "react-icons/bs";
-import image1 from '../../assets/Buddhist Art_Banner1.webp'
+import { useState, useEffect } from 'react';
+import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import Watermark from '@uiw/react-watermark';
-import watermarkimg from '../../assets/luxcraft logo_white.png'
+import image1 from '../../assets/Buddhist Art_Banner1.webp';
+import watermarkimg from '../../assets/luxcraft logo_white.png';
+import { useNavigate } from 'react-router-dom';
+
 function HeroSection() {
-
-  let slides = [
-   image1
-  ];
-
+  let slides = [image1];
 
   return (
-  <div style={{ position: 'relative' }}>
-  {/* <img src={backgroundImage} alt='bgimage' style={{ width: '100%', height:'450px', objectFit: 'cover', position: 'absolute', zIndex: -1 }}/> */}
-    <div className="w-[100%]  m-auto">
-    <Carousel slides={slides}   />
-  </div>
-  </div>
+    <div style={{ position: 'relative' }}>
+      <div className="w-full cursor-pointer m-auto">
+        <Carousel slides={slides} />
+      </div>
+    </div>
   );
 }
 
-export default HeroSection;
-
-
 function Carousel({ slides }) {
   let [current, setCurrent] = useState(0);
-
+  let [isHovered, setIsHovered] = useState(false);
+   const navigate =useNavigate();
   let previousSlide = () => {
     if (current === 0) setCurrent(slides.length - 1);
     else setCurrent(current - 1);
@@ -37,32 +32,49 @@ function Carousel({ slides }) {
     else setCurrent(current + 1);
   };
 
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       nextSlide();
     }, 3000);
     return () => clearInterval(intervalId);
   }, [current]);
+  const handlenavigate =()=>{
+    Navigate('/allproduct/budhha')
+  }
 
-  return (<>
-    <div className="overflow-hidden relative ">
-      <Watermark 
-      image={watermarkimg} height={20} 
-      >
+  return (
+    <div
+      className="overflow-hidden relative transition-transform ease-out duration-1000"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div
-        className={`flex transition ease-out duration-500`}
+        className={`flex`}
         style={{
           transform: `translateX(-${current * 100}%)`,
         }}
       >
         {slides.map((s, index) => (
-          <img key={index} src={s} className="w-[100%] md:w-[100%] h-[100%] " alt={`slide-${index}`} />
+          <div key={index} className="cursor-pointer relative w-full md:w-full h-full transition-opacity ease-out duration-1000">
+            {isHovered ? (
+              <img src={s} className="w-full h-full" alt={`slide-${index}`} />
+            ) : (
+              <Watermark image={watermarkimg} height={20}>
+                <img src={s} className="w-full h-full" alt={`slide-${index}`} />
+              </Watermark>
+            )}
+            {isHovered && (
+              <div className="cursor-pointer absolute top-0 left-0 w-full h-full flex items-center justify-center transition-opacity ease-out duration-1000">
+                <button onClick={handlenavigate} className="cursor-pointer text-white text-2xl bg-black bg-opacity-90 p-2 rounded transition-opacity ease-out duration-1000">
+                  Shop Now
+                </button>
+              </div>
+            )}
+          </div>
         ))}
-        
       </div>
-      </Watermark>
-      <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl">
+
+      <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl transition-opacity ease-out duration-1000">
         <button onClick={previousSlide}>
           <BsFillArrowLeftCircleFill />
         </button>
@@ -71,22 +83,21 @@ function Carousel({ slides }) {
         </button>
       </div>
 
-      <div className="absolute bottom-0 py-4 flex justify-center gap-3 w-full">
-        {slides.map((s, i) => {
-          return (
-            <div
-              onClick={() => {
-                setCurrent(i);
-              }}
-              key={"circle" + i}
-              className={`rounded-full w-5 h-5 cursor-pointer  ${
-                i == current ? "bg-white" : "bg-gray-500"
-              }`}
-            ></div>
-          );
-        })}
-      </div>     
+      <div className="absolute bottom-0 py-4 flex justify-center gap-3 w-full transition-opacity ease-out duration-1000">
+        {slides.map((s, i) => (
+          <div
+            onClick={() => {
+              setCurrent(i);
+            }}
+            key={`circle${i}`}
+            className={`rounded-full w-5 h-5 cursor-pointer transition-bg ease-out duration-1000 ${
+              i === current ? 'bg-white' : 'bg-gray-1000'
+            }`}
+          ></div>
+        ))}
+      </div>
     </div>
-    </>
   );
 }
+
+export default HeroSection;

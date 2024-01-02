@@ -67,7 +67,7 @@ export const links = [
         ],
       },
       {
-        Head: "Global Art Movements PAINTINGS",link:"global-art-movements-paintings",
+        Head: "Global Art Movements",link:"global-art-movements-paintings",
         sublink: [
           { name: "African Art", link: "african-art" },
           { name: "Asian Art", link: "asian-art" },
@@ -173,7 +173,7 @@ export const links = [
     submenu: false,
   },
   {
-    name:"About Us",link:"full-collections",
+    name:"About Us",link:"/aboutus",
     submenu: false,
   },
   {
