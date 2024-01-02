@@ -44,6 +44,7 @@ function App() {
 
           <Route path="/home"  element={<ProtectedLuxcraft element={<Home />}/>} />
           <Route path="/aboutus"  element={<ProtectedLuxcraft element={<Aboutus />}/>} />
+          <Route path="/allproducts" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
 
           <Route path="/allproducts/:slink" element={<ProtectedLuxcraft  element={<Allproducts />}/>} />
           <Route path="/collection/:slink" element={<ProtectedLuxcraft  element={<Categories />}/>} />
