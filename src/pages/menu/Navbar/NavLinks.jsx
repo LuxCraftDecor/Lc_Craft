@@ -66,8 +66,10 @@ const NavLinks = () => {
                 <div className="absolute left-0 w-full  z-10 top-32 hidden group-hover:md:block hover:md:block ">
                   <div className="bg-black w-full bg-opacity-75 border-2 border-white px-16 py-10 grid grid-cols-5 ">
                     {link.sublinks.map((mysublinks, index) => (
-                      <div key={index} className={index !== 0 ? "pl-5 border-l border-white" : ""}>
-                        <h1 className="text-sm capitalize text-left pb-5 text-white font-semibold" onClick={() => handleHeadClick(mysublinks.link)}>
+                     
+                      <div key={index} className={index !== -1 ? "pl-5 border-l border-white" : ""}>
+                       
+                        <h1 className="text-sm capitalize text-left py-5 text-white font-semibold" onClick={() => handleHeadClick(mysublinks.link)}>
                           {mysublinks.Head}
                         </h1>
                         {mysublinks.sublink.map((slink, subIndex) => (

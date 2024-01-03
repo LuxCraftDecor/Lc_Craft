@@ -55,8 +55,8 @@ const Colors = ({ handleChange }) => {
 
         <Input
           handleChange={handleChange}
-          value="Poster"
-          title="Poster"
+          value="Pastel"
+          title="Pastel"
           name="color"
         />
 

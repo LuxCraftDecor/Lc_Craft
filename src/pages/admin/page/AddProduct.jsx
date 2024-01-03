@@ -1,13 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import myContext from '../../../context/data/myContext'
 import Layout from '../../../components/layout/Layout';
 import Navbar from '../../../components/navbar/Navbar';
 import logo from '../../../assets/center design 1.png';
-import { categories } from './categories';
+import { categories, orientation } from './categories';
 function AddProduct() {
     const context = useContext(myContext);
     const { products, setProducts, addProduct } = context;
     const [subImages, setSubImages] = useState([]);
+    const [skuCode, setSkuCode] = useState('');
+
+    useEffect(() => {
+      if (products && products.title) {
+        setSkuCode(generateSKU(products.title));
+      }
+    }, [products]);
+
     const addSubImage = () => {
       if (subImages.length < 4) {
         setSubImages([...subImages, '']);
@@ -21,6 +29,30 @@ function AddProduct() {
         setSubImages(updatedSubImages);
       }
     };
+
+
+
+const generateSKU = (title, index) => {
+  const titleWithNumbers = title
+    .split(/\s+/) 
+    .map((word) => {
+      if (word.length > 0) {
+        return word[0].toUpperCase().charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+      } else {
+        return ''; 
+      }
+    })
+    .join('');
+
+  return `SKU${titleWithNumbers}`;
+};
+
+const handleTitleChange = (e) => {
+  const newTitle = e.target.value;
+  const newSkuCode = generateSKU(newTitle);
+  
+  setProducts({ ...products, title: newTitle, skuCode: newSkuCode });
+};
 
 
     const handleCategoryChange = (e) => {
@@ -40,14 +72,81 @@ function AddProduct() {
         });
       };
 
+    const  handleOrientationchange = (e) =>{
+      const selectedOrientation = e.target.value;
+      setProducts({
+        ...products,
+        orientation:selectedOrientation,
+        
+
+      });
+    }
+
+
+
+
+
+
+    const handleSizeChange = (event, index) => {
+      const updatedTotalPrice = [...products.total_price];
+      updatedTotalPrice[index] = {
+        size: event.target.value,
+        price: updatedTotalPrice[index].price,
+      };
+      setProducts({
+        ...products,
+        total_price: updatedTotalPrice,
+      });
+    };
+  
+    const handlePriceChange = (event, index) => {
+      const updatedTotalPrice = [...products.total_price];
+      updatedTotalPrice[index] = {
+        size: updatedTotalPrice[index].size,
+        price: event.target.value,
+      };
+      setProducts({
+        ...products,
+        total_price: updatedTotalPrice,
+      });
+    };
+  
+    const handleAddSizeWithPrice = () => {
+      setProducts({
+        ...products,
+        total_price: [
+          ...products.total_price,
+          {
+            size: '',
+            price: '',
+          },
+        ],
+      });
+    };
+  
+    const handleRemoveSizeWithPrice = (index) => {
+      const updatedTotalPrice = [...products.total_price];
+      updatedTotalPrice.splice(index, 1);
+      setProducts({
+        ...products,
+        total_price: updatedTotalPrice,
+      });
+    };
+
+
+
+
+
+
+
 
     
     return (
         <div>  
-<div className='flex  justify-center'>
-<div className="bg-decor-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    <div className='flex  justify-center'>
+    <div className="bg-decor-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
 
-<div className="">
+     <div className="">
         <h1 className='text-center text-black text-xl mb-4 font-bold'>Add Product</h1>
      </div>
 
@@ -58,32 +157,37 @@ function AddProduct() {
       </label>
       <input type="text"
             value={products.title}
-            onChange={(e) => setProducts({ ...products, title: e.target.value })}
+            onChange={handleTitleChange}
             name='title'
+            id="title"
             placeholder='Product title'
+            required
             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
             />
     </div>
     <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-        Price
-      </label>
-      <input type="text"
-            value={products.price}
-            onChange={(e) => setProducts({ ...products, price: e.target.value })}
-            name='price'
-            placeholder='Product price'
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
-            />    
-    </div>
+        <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="skuCode">
+          SKU Code
+        </label>
+        <input
+          type="text"
+          value={skuCode}
+          readOnly
+          id="skuCode"
+          name="skuCode"
+          placeholder="Generated SKU code"
+          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"
+        />
+      </div>
     <div className="md:w-1/2 px-3">
       <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
        Quantity
       </label>
-      <input type="text"
+      <input type="number"
             value={products.stock}
             onChange={(e) => setProducts({ ...products, stock: e.target.value })}
             name='stock'
+            required
             placeholder='Product stock'
             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
             />    
@@ -100,10 +204,11 @@ function AddProduct() {
         value={products.category}
         onChange={handleCategoryChange}
         name="category"
+        required
         id="grid-category"
         className="block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"
       >
-        <option value="" disabled>
+        <option value="" disabled selected>
           Select Product Category
         </option>
         {categories.map((category) => (
@@ -151,6 +256,7 @@ function AddProduct() {
             <option value="" disabled selected>
                  Select Product productType
             </option>
+            
             <option value="Handmade Painting">Handmade Painting</option>
             <option value="Printed Painting">Printed Painting</option>
         </select>    
@@ -166,16 +272,19 @@ function AddProduct() {
       </label>
       <select
             value={products.orientation}
-            onChange={(e) => setProducts({ ...products, orientation: e.target.value })}
+            onChange={handleOrientationchange}
             name="orientation"
             className=" block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
             >
             <option value="" disabled selected>
             Select Product orientation
             </option>
-            <option value="Horizontal">Horizontal</option>
-            <option value="Square">Square</option>
-            <option value="Vertical">Vertical</option>
+            {orientation.map((orientations)=>(
+              <option key={orientations} value={orientations.orientation}>
+               {orientations.orientation}
+              </option>
+
+            ))}
 
         </select>   
     </div>
@@ -215,7 +324,7 @@ function AddProduct() {
             <option value="Oil">Oil</option>
             <option value="Mixed Media">Mixed Media</option>
             <option value="Pencil">Pencil</option>
-            <option value="Poster">Poster</option>
+            <option value="Pastel ">Pastel </option>
             <option value="Charcoal">Charcoal</option>
             <option value="Sketch pen">Sketch pen</option>
         </select> 
@@ -285,57 +394,95 @@ function AddProduct() {
 </div>
 
 
-<div className=" md:flex mb-6">
-    <div className="md:w-1/2 px-3 ">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-       Height
-      </label>
-      <input type="text"
-            value={products.height}
-            onChange={(e) => setProducts({ ...products, height: e.target.value })}
-            name='height'
-            placeholder='Height'
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
+<div className=" md:flex md:flex-col mb-6">
+<button
+        type="button"
+        onClick={handleAddSizeWithPrice}
+        className="ml-2  w-20 bg-blue-500 text-white px-2 py-1 rounded"
+      >
+        +
+      </button>
+
+    <div className='flex'>
+    {products.total_price.map((item, index) => (
+        <div key={index} className="flex flex-col">
+          <div  className="md:w-1/2 px-3">
+          <label
+            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+            htmlFor={`grid-size-${index}`}
+          >
+            Size
+          </label>
+          <select
+            name={`size-${index}`}
+            id={`grid-size-${index}`}
+            className="block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"
+            onChange={(e) => handleSizeChange(e, index)}
+            value={item.size}
+          >
+            <option value="" disabled>
+              Select Size
+            </option>
+            {products.orientation &&
+              orientation
+                .find(
+                  (orientation) =>
+                    orientation.orientation === products.orientation
+                )
+                .size.map((sizes) => (
+                  <option key={sizes.size1} value={sizes.size1}>
+                    {sizes.size1}
+                  </option>
+                ))}
+          </select>
+          </div>
+          <div className=" md:w-1/2 px-3">
+          <label
+            className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+            htmlFor={`grid-price-${index}`}
+          >
+            Price
+          </label>
+        
+            <input
+              type="text"
+              name={`price-${index}`}
+              required
+              placeholder="Product price"
+              className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"
+              onChange={(e) => handlePriceChange(e, index)}
+              value={item.price}
             />
+            <button
+              type="button"
+              className="ml-2 bg-red-500 text-white px-2 py-1 rounded"
+              onClick={() => handleRemoveSizeWithPrice(index)}
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <div className="md:w-1/2 px-3">
+        <label
+          className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
+          htmlFor="grid-last-name"
+        >
+          Sizes with Price
+        </label>
+        <ul>
+          {products.total_price.map((item, index) => (
+            <li key={index}>
+              Size: {item.size}, Price: {item.price}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-    <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-        Width
-      </label>
-      <input type="text"
-            value={products.width}
-            onChange={(e) => setProducts({ ...products, width: e.target.value })}
-            name='width'
-            placeholder='Width'
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-1 px-4 mb-3"  
-            />    
+
+      
     </div>
-    <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-      Is it customizable?
-      </label>
-      <label className="mr-4">
-                                <input
-                                    type="radio"
-                                    value="Yes"
-                                    checked={products.customizable === "Yes"}
-                                    onChange={(e) => setProducts({ ...products, customizable: e.target.value })}
-                                    className="mr-2"
-                                />
-                                Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    value="No"
-                                    checked={products.customizable === "No"}
-                                    onChange={(e) => setProducts({ ...products, customizable: e.target.value })}
-                                    className="mr-2"
-                                />
-                                No
-                            </label>   
-    </div>
-  </div>
  
 
   <div className=" md:flex mb-6">
