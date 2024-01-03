@@ -9,43 +9,33 @@ export const links = [
     name: "Collection",
     submenu: true,
     sublinks: [
-      // {
-      //   Head: "FIGURATIVE PAINTINGS",  link:"Figurative-paintings",
-      //   sublink: [
-      //     { name: "Couple, Romantic, Love", link: "Couple-Romantic-Love" },
-      //     { name: "Women, Lady, Feminine", link: "Women-Lady-Feminine" },
-      //     { name: "Fashion, Glamour", link: "Fashion-Glamour" },
-      //     { name: "Tribal, African", link: "Tribal-African" },
-      //     { name: "Mother & Baby", link: "Mother-Baby" },
-      //     { name: "Sunrise", link: "Sunrise" },
-      //     { name: "Nude, Anatomy", link: "Nude-Anatomy" },
-      //     { name: "See More >", link: "Figurative-Paintings-More" },
-      //   ],
-      // },
-      // {
-      //   Head: "RELIGIOUS PAINTINGS",link:"Religious-paintings",
-      //   sublink: [
-      //     { name: "Buddha", link: "Buddha" },
-      //     { name: "Shiva, Mahadev, Parvati", link: "Shiva-Mahadev-Parvati" },
-      //     { name: "Krishna, Radha Krishna", link: "Krishna-Radha-Krishna" },
-      //     { name: "Ganesha, Ganapati", link: "Ganesha-Ganapati" },
-      //     { name: "Jesus Christ", link: "Jesus-Christ" },
-      //     { name: "Mahabharat, Ramayana", link: "Mahabharat-Ramayana" },
-      //     { name: "See More >", link: "Religious-Paintings-More" },
-      //   ],
-      // },
-      // {
-      //   Head: "LANDSCAPE PAINTINGS",link:"LandscapePaintings",
-      //   sublink: [
-      //     { name: "Nature, Forest, Scenery", link: "Nature-Forest-Scenery" },
-      //     { name: "Ship, Sea, Beach", link: "Ship-Sea-Beach" },
-      //     { name: "City", link: "City" },
-      //     { name: "Tree, Botanical", link: "Tree-Botanical" },
-      //     { name: "Sunrise, Sunset, Rising Sun", link: "Sunrise-Sunset-Rising-Sun" },
-      //     { name: "Walkway, Road", link: "Walkway-Road" },
-      //     { name: "See More >", link: "Landscape-Paintings-More" },
-      //   ],
-      // },
+      {
+        Head: "Abstract and Experimental",  link:"abstract-and-experimental",
+        sublink: [
+          { name: "Geometric Patterns", link: "geometric-patterns" },
+          { name: "Abstract Expressionism", link: "abstract-expressionism" },
+          { name: "Color Field Painting", link: "color-field-painting" },
+          { name: "Mixed Media", link: "mixed-media" },
+        ],
+      },
+      {
+        Head: "Cultural and Religious art",link:"Cultural-and-Religious-paintings",
+        sublink: [
+          { name: "Indigenous Australian Art", link: "indigenous-australian-art" },
+          { name: "Asian Religious Art(Buddhism, Hinduism)", link: "asian-religious-art" },
+          { name: "Middle Eastern Art (Islamic Calligraphy, etc.)", link: "middle-eastern-art" },
+          { name: "Christian Art (Iconography, Biblical Scenes)", link: "christian-art" },
+        ],
+      },
+      {
+        Head: "Landscape and Nature",link:"landscape-and-nature",
+        sublink: [
+          { name: "Seascapes and Ocean Viwes", link: "seascapes-and-ocean-views" },
+          { name: "Forests and Mountains", link: "forest-mountains" },
+          { name: "Urban Landscapes", link: "urban-landscapes" },
+          { name: "floral, Botanical", link: "floral-Botanical" },
+        ],
+      },
       {
         Head: "Modern and Contemporary",link:"modern-and-contemporary",
         sublink: [
@@ -53,6 +43,8 @@ export const links = [
           { name: "Milimal Art", link: "milimal-art" },
           { name: "Pop Art", link: "pop-art" },
           { name: "Urban Art", link: "urban-art" },
+          { name: "Surrealism", link: "surrealism-art" },
+
         ],
       },
       {
@@ -60,10 +52,9 @@ export const links = [
         sublink: [
           { name: "Colonial Art", link: "colonial-art" },
           { name: "Contemporary Australian Art", link: "contemporary-australian-art" },
-          { name: "Indigeous Art", link: "indigeous-art" },
-          { name: "Landscape", link: "landscape" },
-          { name: "Australian Cities", link: "australian-Cities" },
-          { name: "Australian Culture & Heritage", link: "australian-culture-heritage" },
+          { name: "Aboriginal and Torres Strait Islander Art", link: "aboriginal-torres-strait-islander-art" },
+          { name: "Historical Australian Landscapes", link: "historical-australian-landscapes" },
+          { name: "Australian Wildlife", link: "australian-wildlife" },
         ],
       },
       {
@@ -75,33 +66,60 @@ export const links = [
           { name: "Latin American", link: "latin-american" },
         ],
       },
-      // {
-      //   Head: "ANIMAL & BIRDS PAINTINGS",link:"animal-bird-paintings",
-      //   sublink: [
-      //     { name: "Horses", link: "Horses" },
-      //     { name: "Wildlife", link: "Wildlife" },
-      //     { name: "Elephant", link: "Elephant" },
-      //     { name: "Birds", link: "Birds" },
-      //     { name: "Fishes", link: "Fishes" },
-      //     { name: "Dog", link: "Dog" },
-      //     { name: "See More >", link: "Animal-Birds-Paintings-More" },
-      //   ],
-      // },
+      {
+        Head: "Portraiture",link:"portraiture",
+        sublink: [
+          { name: "classical portraits", link: "classical-portraits" },
+          { name: "Contemporary Portraits", link: "contemporary-portraits" },
+          { name: "Abstract ortraits", link: "abstract-portraits" },
+          { name: "Group and Family Portraits", link: "group-family-portraits" },
+        ],
+      },
 
       {
-        Head: "Traditional",link:"traditional-paintings",
+        Head: "Traditional and Classical Art",link:"traditional-classical-art",
         sublink: [
           { name: "Baroque Style", link: "baroque-style" },
           { name: "Classic Realism", link: "classic-realism" },
           { name: "Impressionism", link: "impressionism" },
           { name: "Renaissance Inspired", link: "renaissance-Inspired" },
+          { name: "Romanticism", link: "romanticism" },
+
         ],
       },
+   
+
+      {
+        Head: "World Culture and Religion",link:"world-culture-religion",
+        sublink: [
+          { name: "Art Inspired by Global Religions", link: "art-inspired-global-religions" },
+          { name: "Cultural Festivals and Traditions", link: "cultural-festivals-traditions" },
+          { name: "Mythological Art from Various Cultures", link: "mythological-art-cultures" },
+          { name: "Religious Landmarks and Architecture", link: "religious-landmarks-architecture" },
+          
+        ],
+      },
+
+      // {
+      //   Head: "World Culture and Religion",link:"world-culture-religion",
+      //   sublink: [
+      //     { name: "Art Inspired by Global Religions", link: "art-inspired-global-religions" },
+      //     { name: "Cultural Festivals and Traditions", link: "cultural-festivals-traditions" },
+      //     { name: "Mythological Art from Various Cultures", link: "mythological-art-cultures" },
+      //     { name: "Religious Landmarks and Architecture", link: "religious-landmarks-architecture" },
+          
+      //   ],
+      // },
+
       {
         Head: "Custom Art Services",link:"custom-art-services",
         sublink: [
+          { name: "Personalized Portraits", link: "personalized-portraits" },
+          { name: "Custom Landscape Paintings", link: "custom-landscape-paintings" },
           { name: "Art Consulting", link: "art-consulting" },
           { name: "Commissioned Artwork", link: "commissioned-artwork" },
+          { name: "Bespoke Abstract Creations", link: "bespoke-abstract-creations" },
+          { name: "Client-Specific Thematic Art", link: "client-specific-thematic-art" },
           
         ],
       },

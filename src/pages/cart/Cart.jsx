@@ -6,27 +6,33 @@ import {loadStripe} from '@stripe/stripe-js';
 import { useSelector } from 'react-redux';
 
 function Cart() {
-  const context = useContext(myContext)
-  const { mode, cartProductsFromFirestore,deleteCartItemFromFirestore, handleCounterChange } = context;
+const context = useContext(myContext)
+const { mode, cartProductsFromFirestore,deleteCartItemFromFirestore, handleCounterChange } = context;
 const navigate = useNavigate()
+const [couponCode, setCouponCode] = useState('');
+const [showCouponInput, setShowCouponInput] = useState(false);
+const [showAddressInputs, setShowAddressInputs] = useState(false);
+const [addressFields, setAddressFields] = useState({
+  Country: '',
+  Suburb: '',
+  state: '',
+  postalCode: ''
+});
 
-const cartItems = useSelector((state) => state.cart.items);
-
-const combinedCartItems = [...cartItems, ...cartProductsFromFirestore];
   const [totalAmout, setTotalAmount] = useState(0);
   useEffect(() => {
     let temp = 0;
-    combinedCartItems.forEach((cartItem) => {
+    cartProductsFromFirestore.forEach((cartItem) => {
       temp = temp + parseInt(cartItem.price) * cartItem.quantity;
     })
     setTotalAmount(temp);
-  }, [combinedCartItems])
+  }, [cartProductsFromFirestore])
 
 
 var shipping;
   var shipping;
 if(totalAmout>0){
-  shipping = parseInt(0);
+  shipping = parseInt(50);
 }
 else{
   shipping = parseInt(0);
@@ -87,28 +93,39 @@ else{
         console.error('Error making payment:', error);
     }
 };
-
+const handleCouponApply = () => {
+};
+const handleAddressUpdate = () => {
+  // Implement your logic to handle address update here
+  // You can use the 'address' state to get the entered address details
+  // Update the logic based on your specific requirements
+};
 
   return (
     <Layout >
 
-      <div className="h-screen bg-gray-100 pt-5 mb-[60%] " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
-        <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
-        <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0 ">
-          <div className="rounded-lg md:w-2/3 ">
-            {combinedCartItems.map((item, index) => {
-              const { title, price, description, imageUrl, quantity } = item;
-              return (
-                <div className="justify-between mb-6 rounded-lg border drop-shadow-xl bg-white p-6 sm:flex sm:justify-start" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '' }}>
+      <div className=" px-32 py-20 " style={{ backgroundColor: mode === 'dark' ? '#282c34' : '', color: mode === 'dark' ? 'white' : '', }}>
+        <h1 className="mb-10 text-left text-3xl font-bold">Cart</h1>
+        <div className=" max-w-5xl  px-6 md:flex  gap-20 ">
+          <div className=" w-2/3 ">
+            <div className=' flex justify-between px-5 mt-1  bg-white '>
+                <p className='font-bold text-sm uppercase'>Product</p>
+                <p className='font-bold text-sm uppercase'>Total</p>
+              </div>
+
+            {cartProductsFromFirestore.map((item, index) => {
+              const { title, price,size, description, imageUrl, quantity } = item;
+              const totalProductPrice = parseInt(price) * quantity;
+
+              return (<>
+                <div className="justify-between   border-t bg-white px-3 py-10 sm:flex sm:justify-start" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '' }}>
                 <img src={imageUrl} alt="product-image" className="w-full rounded-lg sm:w-40" />
                 <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                   <div className="mt-5 sm:mt-0">
-                    <h2 className="line-clamp-1 text-lg font-bold text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>{title}</h2>
-                    <h2 className="line-clamp-1 text-sm text-gray-900" style={{ color: mode === 'dark' ? 'white' : '' }}>{description}</h2>
-                    <p className="mt-1 text-xs font-semibold text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>₹{price}</p>
-                  </div>
-                 
-                    <div className="bg-gray-200 h-10 py-2 lg:px-2 rounded-lg">
+                    <h2 className="line-clamp-1 text-base underline text-[#11181f]" style={{ color: mode === 'dark' ? 'white' : '' }}>{title}</h2>
+                    <p className="mt-1 text-base  text-[#11181f]" style={{ color: mode === 'dark' ? 'white' : '' }}>${price}</p>
+                   <h2 className="mt-2 text-xs text-[#11181f]" style={{ color: mode === 'dark' ? 'white' : '' }}><span className='font-bold'>Size:</span>{size}</h2>
+                   <div className=" mt-3 h-10 w-32 py-2 lg:px-2 border border-gray-700 rounded">
                     <button className="px-4 text-sm text-black" onClick={() => handleCounterChange(item.id, 'decrease')}>
                       -
                     </button>
@@ -116,49 +133,112 @@ else{
                     <button className="text-sm text-black px-4" onClick={() => handleCounterChange(item.id, 'increase')}>
                       +
                     </button>
-
-
                     </div>
+                    <p className='text-xs underline mt-3' onClick={() => deleteCartItemFromFirestore(item.id)} >Remove Item</p>
+
+                  </div>
                  
-                  <div onClick={() => deleteCartItemFromFirestore(item.id)} className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                    </svg>
+                   
+                 
+                  <div className=" ">
+                    <p> ${totalProductPrice}</p>
                   </div>
                 </div>
               </div>
-              )
+              </>   )
             })}
 
           </div>
-          {combinedCartItems.length > 0 && (
-          <div className='flex flex-col md:w-1/3'>
-          <div className=' h-32 w-full border border-1 border-gray-200 bg-white py-3 mb-3 px-8'  >
-        <div className='flex justify-between'>
-             <span className='text-gray-400'>Shipping Address</span>
-            <span className=' bg-gray-100 px-4 py-1 rounded-md cursor-pointer' >Change</span>
-         </div>
-        </div>
+
+          <div className='w-1/3'>
+         
+          {cartProductsFromFirestore.length > 0 && (
+          <div className='flex flex-col '>
+               <p className='text-right font-bold text-sm uppercase'>Totalcarts</p>
+               <div className="mt-1 border-t px-5 py-5">
+                    {!showCouponInput ? (
+                      <p className="cursor- pointer underline text-base text-[#11181f]" onClick={() => setShowCouponInput(true)}>
+                        Add a coupon
+                      </p>
+                    ) : (
+                      <div className="flex ">
+                        <input
+                          type="text"
+                          placeholder="Enter coupon code"
+                          className="border px-2 w-40 py-4 mr-2"
+                          value={couponCode}
+                          onChange={(e) => setCouponCode(e.target.value)}
+                        />
+                        <button className="bg-black text-white px-4 py-1 rounded" onClick={handleCouponApply}>
+                          Apply
+                        </button>
+                      </div>
+                    )}
+                  </div>
+        
         
 
-          <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-full" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '', }}>
-            <div className="mb-2 flex justify-between">
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Subtotal</p>
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>${totalAmout}</p>
+          <div className="mt-6 h-full  border-t bg-white   md:mt-0 md:w-full" style={{ backgroundColor: mode === 'dark' ? 'rgb(32 33 34)' : '', color: mode === 'dark' ? 'white' : '', }}>
+            <div className="py-5 flex justify-between border-b">
+              <p className="text-gray-700 px-5" style={{ color: mode === 'dark' ? 'white' : '' }}>Subtotal</p>
+              <p className="text-gray-700 px-5 " style={{ color: mode === 'dark' ? 'white' : '' }}>${totalAmout}</p>
             </div>
-            {/* <div className="flex justify-between">
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>Shipping</p>
-              <p className="text-gray-700" style={{ color: mode === 'dark' ? 'white' : '' }}>${shipping}</p>
-            </div>  */}
-            <hr className="my-4" />
+            <div className="flex py-5 justify-between">
+              <p className="text-gray-700 px-5" style={{ color: mode === 'dark' ? 'white' : '' }}>Shipping</p>
+              <p className="text-gray-700 px-5" style={{ color: mode === 'dark' ? 'white' : '' }}>${shipping}</p>
+            </div> 
+
+            <div className="py-5">
+                    <p className="px-5 underline cursor-pointer" onClick={() => setShowAddressInputs(!showAddressInputs)}>
+                      Change Address
+                    </p>
+                    {showAddressInputs && (
+                      <div className="mt-3 px-5 flex flex-col">
+                        <input
+                          type="text"
+                          placeholder="Country"
+                          className="border px-3 rounded py-4 mb-2 border-black"
+                          value={addressFields.Country}
+                          onChange={(e) => setAddressFields({ ...addressFields, Country: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Suburb"
+                          className="border px-3 rounded py-4 mb-2 border-black"
+                          value={addressFields.Suburb}
+                          onChange={(e) => setAddressFields({ ...addressFields, Suburb: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          placeholder="State"
+                          className="border px-3 rounded py-4 mb-2 border-black"
+                          value={addressFields.state}
+                          onChange={(e) => setAddressFields({ ...addressFields, state: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Postal Code"
+                          className="border px-3 rounded py-4 mb-2 border-black"
+                          value={addressFields.postalCode}
+                          onChange={(e) => setAddressFields({ ...addressFields, postalCode: e.target.value })}
+                        />
+                        <button className="hover:bg-blue-500 bg-black text-white px-4 py-4 rounded" onClick={handleAddressUpdate}>
+                          Update
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+
+
             <div className="flex justify-between mb-3">
-              <p className="text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>Total</p>
+              <p className="text-base font-bold px-5" style={{ color: mode === 'dark' ? 'white' : '' }}>Total</p>
               <div className>
-                <p className="mb-1 text-lg font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>${grandTotal}</p>
+                <p className="mb-1 px-5 text-base font-bold" style={{ color: mode === 'dark' ? 'white' : '' }}>${grandTotal}</p>
               </div>
             </div>
-          <button className="items-center h-10 w-full bg-orange-400" onClick={makePayment}>
-            Buy Now
+          <button className="items-center text-white h-10 w-full rounded bg-black hover-bg-blue-500" onClick={makePayment}>
+           Proceed to Checkout
           </button>
             
           </div>
@@ -166,6 +246,8 @@ else{
           
           </div>
              )}
+          </div>
+        
 
         
         </div>

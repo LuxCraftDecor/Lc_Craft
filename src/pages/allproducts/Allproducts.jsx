@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 import Sidebar from "../../Sidebar/Sidebar";
 import "../../index.css";
 import myContext from '../../context/data/myContext';
@@ -52,39 +52,53 @@ function Allproducts() {
 
   const filteredProducts = filteredData(product, selectedCategory);
 
-  const handleproductClick = (productId) => {
-    navigate(`/productinfo/${productId}`);
-  };
+
+  
+ 
 
   return (
     <>
-      <Layout>
-        <Banner selectedCategory={selectedCategory} />
-        <div className="px-4 lg:px-24 flex lg:flex-row md:flex-row flex-col">
-          <div className="w-full md:w-1/4 lg:w-1/5">
-            <Sidebar handleChange={handleChange} />
-          </div>
-          <div className="w-full md:w-3/4 lg:w-4/5 flex flex-wrap px-10 z-[-2]">
-            {filteredProducts.map((item, index) => {
-              const { title, price, artistname, imageUrl, id } = item;
-              return (
-                <section key={item.id} onClick={() => handleproductClick(id)} className=" m-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-gray-300 p-5 cursor-pointer">
-                  <img className="rounded-2xl w-full h-40 p-2 hover:scale-110 transition-scale-110 duration-300 ease-in-out" src={imageUrl} alt="product" />
-                  <div className="card-details">
-                    <h3 className="mb-4 line-clamp-1">{title}</h3>
-                    <section className="mb-4 flex">{artistname}</section>
-                    <section className="flex justify-between items-center ">
-                      <div className="price">$ {price}</div>
-                    </section>
-                  </div>
-                </section>
-              );
-            })}
-          </div>
-        </div>
-      </Layout>
+<Layout>
+  <Banner selectedCategory={selectedCategory} />
+  <div className="px-4 lg:px-16 flex ">
+    <div className="w-full flex flex-wrap">
+      {filteredProducts.map((item, index) => {
+        const { title, total_price, imageUrl, id } = item;
+        const totalPrices = total_price || [];
+        const prices = totalPrices.map((item) => parseInt(item.price));
+        const lowestPrice = Math.min(...prices);
+        const highestPrice = Math.max(...prices);
+
+        return (
+          <Link
+            key={item.id}
+            to={`/productinfo/${id}`}
+            className="card m-2 w-full sm:w-[385px] md:w-[385px] lg:w-[385px] sm:h-[385px] md:h-[450px] lg:h-[450px] xl:h-[450px] xl:w-[385px] border border-gray-100 p-4 cursor-pointer"
+          >
+            <img
+              className="w-full h-[300px] hover:scale-100 transition-scale-100 duration-300 ease-in-out"
+              src={imageUrl}
+              alt="product"
+            />
+            <div className="card-details">
+              <h3 className="my-4 text-lg line-clamp-1">{title}</h3>
+              <section className="flex justify-between items-center">
+                <div className="price">${lowestPrice}-${highestPrice}</div>
+              </section>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
+
+
+
+
     </>
   );
+  
 }
 
 export default Allproducts;

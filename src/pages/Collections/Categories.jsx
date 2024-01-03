@@ -9,6 +9,13 @@ const AustralianArt = lazy(() => import('./AustralianCategory'));
 const GlobalArtMovements = lazy(() => import('./GlobalaCategories'));
 const Traditional = lazy(() => import('./Traditionalcategories'));
 const CustomArtServices = lazy(() => import('./CustomArtServices'));
+const Portraiture = lazy(() => import('./Portraiture'));
+const AbstractPaintings = lazy(() => import('./AbstractPaintings'));
+const Cultureandreligious = lazy(() => import('./Cultureand religious'));
+const LandscapeandNature = lazy(() => import('./Landscapeand Nature'));
+const WorldCulture = lazy(() => import('./World Culture'));
+
+
 
 
 const Categories = () => {
@@ -23,10 +30,22 @@ const Categories = () => {
         return AustralianArt;
       case 'global-art-movements-paintings':
         return GlobalArtMovements;
-      case 'traditional-paintings':
+      case 'traditional-classical-art':
         return Traditional;
         case 'custom-art-services':
         return CustomArtServices;
+
+
+        case 'portraiture':
+          return Portraiture;
+        case 'abstract-and-experimental':
+          return AbstractPaintings;
+        case 'Cultural-and-Religious-paintings':
+          return Cultureandreligious;
+        case 'landscape-and-nature':
+          return LandscapeandNature;
+          case 'world-culture-religion':
+          return WorldCulture;
       default:
         return null;
     }

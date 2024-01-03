@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import IndigenousFqa, { ColonialFqa, Contemporaryfqa, LandscapeFqA } from '../../components/FQA/Australianfqa'
-
+import { Link, useParams } from 'react-router-dom';
+import { links } from '../menu/Navbar/Mylinks';
+import myContext from '../../context/data/myContext';
 export default function AustralianCategory() {
+  const context = useContext(myContext);
+  const {product} = context;
+  const [isHovered, setIsHovered] = useState(false);
+  const { slink } = useParams();
+  useEffect(() => {
+    const filteredProducts = product.filter(item => item.category.toLowerCase() === slink.toLowerCase());
+    
+    console.log(filteredProducts);
+  }, [product, slink]);
+
   return (
     <>
    <div className="relative ">
@@ -10,7 +22,7 @@ export default function AustralianCategory() {
       />
       <div className="container mx-auto px-6 sm:px-20 py-10 md:py-20 flex flex-col sm:flex-row items-center relative z-10">
         <div className="sm:w-full xl:w-full flex flex-col items-center justify-center py-16 sm:py-0">
-          <h1 className="text-3xl xl:text-7xl text-blue-900  text-center">
+          <h1 className="text-3xl xl:text-5xl text-blue-900  text-center">
             Welcome to the Heart of Australian Art.
           </h1>
 
@@ -19,25 +31,32 @@ export default function AustralianCategory() {
           </p>
           <div className="flex gap-5">
             <button href="#" className="text-black sm:font-xl uppercase py-3 px- sm:py-4 sm:px-8 rounded-full border border-blue-900 shadow-lg bg-white hover:bg-white mt-8 sm:mt-16">
-              Explore Paintings
+              <Link to={`/allproducts/${slink}`}>Explore Paintings</Link>
             </button>
           </div>
         </div>
         </div>
     </div>
+    
 
 
 
-  <div class="flex flex-col px-6 py-5 sm:px-20 lg:flex-row">
-  <div class="w-full lg:w-1/2 p-4">
-    <p class="text-5xl mb-4 text-[#454545] ">Indigenous Art:</p>
-    <p class="text-lg text-[#676767] ">The Soul of the Continent Dive into the profound and spiritual realm of Indigenous Art, where every brushstroke tells a story steeped in ancient traditions and lore. This art form, originating tens of thousands of years ago, is a window into the world's oldest continuous culture. Through dot paintings, bark art, and ceremonial sculptures, Indigenous artists narrate the Dreamtime stories and connect the past with the present.</p>
- <IndigenousFqa/>
+    <div className="flex flex-col px-6 py-5 sm:px-20 lg:flex-row relative">
+  <div className="w-full lg:w-1/2 p-4">
+    <p className="text-5xl mb-4 text-[#454545]">Indigenous Art:</p>
+    <p className="text-lg text-[#676767]">The Soul of the Continent Dive into the profound and spiritual realm of Indigenous Art, where every brushstroke tells a story steeped in ancient traditions and lore. This art form, originating tens of thousands of years ago, is a window into the world's oldest continuous culture. Through dot paintings, bark art, and ceremonial sculptures, Indigenous artists narrate the Dreamtime stories and connect the past with the present.</p>
+    <IndigenousFqa/>
   </div>
-  <div class="w-full lg:w-1/2 p-4">
-    <img src="https://cdn.tatlerasia.com/tatlerasia/i/2023/02/03181402-screenshot-2023-02-03-at-60857-pm_cover_1500x1075.jpg" alt="Image Description" class="w-full h-auto object-cover" />
-  </div>
+  <div className="w-full lg:w-1/2 p-4 relative"  onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
+    <img src="https://cdn.tatlerasia.com/tatlerasia/i/2023/02/03181402-screenshot-2023-02-03-at-60857-pm_cover_1500x1075.jpg" alt="Image Description" className="w-full h-auto object-cover" />
+    {isHovered && (
+          <button className="bg-blue-500 text-white px-4 py-2 rounded absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-blue-700">
+            Explore
+          </button>
+        )}  </div>
 </div>
+
 
 
 <div class="flex flex-col px-6 py-5 sm:px-20 lg:flex-row">

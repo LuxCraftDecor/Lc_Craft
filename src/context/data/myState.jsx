@@ -25,12 +25,15 @@ function myState(props) {
     const [products, setProducts] = useState({
         title: null,
         artistname: null,
-        price: null,
+        total_price: [
+          {
+            size: '',
+            price:'',
+          }
+        ],
         imageUrl: null,
         category: null,
-        subcategory: null,
-        width: null,
-        height: null,
+        subcategory: null,        
         customizable: null,
         productType: null,
         color: null,
@@ -53,15 +56,11 @@ function myState(props) {
     const addProduct = async () => {
 
         if (products.title == null || 
-            products.price == null || 
             products.imageUrl == null || 
             products.category == null ||
             products.subcategory == null ||
             products.artistname == null || 
             products.description == null ||
-            products.width == null ||
-            products.height == null ||
-            products.customizable == null ||
             products.productType == null ||
             products.color == null ||
             products.material == null ||

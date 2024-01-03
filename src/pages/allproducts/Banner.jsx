@@ -1,7 +1,6 @@
 // Banner.js
 
 import React from "react";
-import PropTypes from "prop-types";
 
 const banners = {
   "modern-and-contemporary": "Banner for Category 3",
@@ -10,69 +9,30 @@ const banners = {
     text: "Banner for Category 2",
     image: "url_for_category_2_image.jpg",
   },  
-  "pop-art":"",
-  "urban-art":"",
-  "australian-art":"",
-  "colonial-art":{
-    text:"At LuxcraftDecor, our Global Art Moments collection is an expedition into the vast and varied realms of art from across the world. This category is a celebration of diverse cultures, histories, and artistic expressions. Here, we invite you to explore and connect with the global art community through our curated selection.",
-    image: ""
-  },
-  "contemporary-australian-art": "",
-  "indigeous-art":"",
-  "landsacpe":"",
-  "australian-Cities":"",
-  "australian-culture-heritage":"",
-  "global-art-movements-paintings": "",
-  "african-art" :"",
-  "asian-art":"",
-  "historical-european-masters" :"",
-  "latin-american":"",
-  "traditional-paintings":"",
-  "baroque-style":"",
-  "classic-realism":"",
-  "impressionism":"",
-  "renaissance-Inspired":"",
-  "custom-art-services":"",
-  "art-consulting":"",
-  "commissioned-artwork": "",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "urban-art": {
+    text: "Welcome to LuxcraftDecor's Urban Art collection, where the pulsating energy of the streets meets the elegance of fine art. Urban Art, a revolutionary form of artistic expression, originates from the heart of the cityscape. It's where graffiti's rawness, street art's boldness, and modern life's vibrancy collide to create something truly extraordinary.",
+    image: "url_for_category_2_image.jpg",
+  }, 
+  // ... (other categories)
 };
 
 const Banner = ({ selectedCategory }) => {
-    const bannerInfo = banners[selectedCategory];
-  
-    if (!bannerInfo) {
-      return null;
-    }
-  
-    const { text, image } = bannerInfo;
-  
-    return (
-      <div
-        className={`banner-${selectedCategory} text-center text-2xl p-20`}
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        {text}
-      </div>
-    );
-  };
+  const bannerInfo = banners[selectedCategory];
 
-Banner.propTypes = {
-  selectedCategory: PropTypes.string.isRequired,
+  if (!bannerInfo) {
+    return null;
+  }
+
+  const { text, image } = bannerInfo;
+
+  return (
+    <div
+      className={`banner-${selectedCategory} text-center text-2xl p-20`}
+      style={{ backgroundImage: `url(${image})` }}
+    >
+      {text}
+    </div>
+  );
 };
 
 export default Banner;

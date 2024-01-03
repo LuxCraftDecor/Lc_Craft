@@ -12,22 +12,25 @@ const Sidebar = ({ handleChange }) => {
   };
 
   return (
-    <>
-      <section className="w-full flex  flex-col ">
-        <button onClick={toggleFilters} className=" text-black border mb-5 p-2 ">
-          Filter 
-        </button>
+    <div>
+    <section className="flex items-center  flex-col">
+      <button
+        onClick={toggleFilters}
+        className="w-full md:w-40 text-black border mb-5 p-2"
+      >
+        Filter
+      </button>
 
-        {showFilters && (
-          <section  className=" h-screen  border-r-2 border-gray-300 flex flex-col items-center overflow-y-auto" id="style-4">
-            <Category handleChange={handleChange} />
-            <Price handleChange={handleChange} />
-            <Orientation handleChange={handleChange} />
-            <Colors handleChange={handleChange} />
-          </section>
-        )}
-      </section>
-    </>
+      {showFilters && (
+        <section className=" border-r-2 border-gray-300 flex flex-col items-center overflow-y-auto" id="style-4">
+          <Category handleChange={handleChange} />
+          <Price handleChange={handleChange} />
+          <Orientation handleChange={handleChange} />
+          <Colors handleChange={handleChange} />
+        </section>
+      )}
+    </section>
+  </div>
   );
 };
 export default Sidebar;
